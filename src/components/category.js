@@ -25,6 +25,11 @@ function Category() {
     setSelectedProduct(null);
   };
 
+  const handlePayAndPlayClick = () => {
+    console.log("Pay & Play button clicked");
+    // Here you can add the code for handling the Pay & Play functionality
+  };
+
   return (
     <section className="category">
       <div className="container">
@@ -34,7 +39,6 @@ function Category() {
             <div className="category__product" key={product.id}>
               <img src={product.image} alt={product.title} className="category__product-image" />
               <h3 className="category__product-title">{product.title}</h3>
-             
               <button className="category__product-button" onClick={() => handlePlayClick(product)}>Play</button>
             </div>
           ))}
@@ -48,6 +52,7 @@ function Category() {
                 <h3 className="category__modal-title">{selectedProduct.title}</h3>
                 <p className="category__modal-description">{selectedProduct.description}</p>
               </div>
+              <button className="category__modal-pay-and-play" onClick={handlePayAndPlayClick}>Pay & Play</button>
             </div>
           </div>
         )}

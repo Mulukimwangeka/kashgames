@@ -117,4 +117,20 @@
     line-height: 1.5;
     text-align: justify;
   }
+
+  .category__modal-pay-and-play {
+    background-color: #4CAF50;
+    color: white;
+    font-size: 16px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+  }
+  
+  .category__modal-pay-and-play:hover {
+    background-color: #3e8e41;
+  }
+  
   
