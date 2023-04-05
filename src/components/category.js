@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import './Styles/Category.css'
 
 function Category() {
   const [products, setProducts] = useState([]);
