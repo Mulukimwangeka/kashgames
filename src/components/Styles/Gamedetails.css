@@ -1,0 +1,61 @@
+.game-details {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .game-details__content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin: 20px;
+    max-width: calc(100% - 40px);
+    max-height: calc(100% - 40px);
+  }
+  
+  
+  .game-details__image {
+    max-width: 400px;
+    max-height: 400px;
+    margin-right: 20px;
+  }
+  
+  .game-details__info {
+    flex: 1;
+  }
+  
+  .game-details__title {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  
+  .game-details__description {
+    margin-bottom: 20px;
+  }
+  
+  .game-details__close {
+    padding: 10px;
+    border: none;
+    background-color: #f44336;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  .game-details__close:hover {
+    background-color: #d32f2f;
+  }
+  
