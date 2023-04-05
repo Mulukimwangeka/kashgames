@@ -25,9 +25,26 @@ function Category() {
     setSelectedProduct(null);
   };
 
-  const handlePayAndPlayClick = () => {
-    console.log("Pay & Play button clicked");
-    // Here you can add the code for handling the Pay & Play functionality
+  const handlePayAndPlayClick = async () => {
+    const phoneNumber = prompt('Please enter your phone number');
+    if (phoneNumber && /^\d{10}$/.test(phoneNumber)) {
+      console.log('Phone number:', phoneNumber);
+      // Here you can add the code to handle the payment confirmation and fetch the game data
+      // For example:
+      try {
+        const gameResponse = await fetch('https://fakegameapi.com/game');
+        const gameData = await gameResponse.json();
+        console.log('Game data:', gameData);
+        // Once the game data is fetched, you can display it to the user or redirect to the game page
+        // For example:
+        // window.location.href = '/game?id=' + gameData.id;
+      } catch (error) {
+        console.error('Error fetching game data:', error);
+        alert('Error fetching game data. Please try again later.');
+      }
+    } else {
+      alert('Please enter a valid 10-digit phone number');
+    }
   };
 
   return (
