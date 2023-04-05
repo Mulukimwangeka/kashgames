@@ -26,6 +26,7 @@ function Category() {
   };
 
   const handlePayAndPlayClick = async () => {
+    setSelectedProduct(null); // close the modal before prompting for phone number
     const phoneNumber = prompt('Please enter your phone number');
     if (phoneNumber && /^\d{10}$/.test(phoneNumber)) {
       console.log('Phone number:', phoneNumber);

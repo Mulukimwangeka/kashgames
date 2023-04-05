@@ -16,6 +16,7 @@ function GamesList() {
   }, []);
 
   return (
+    
     <div className="games-list">
       {games.map(game => (
         <GameCard
