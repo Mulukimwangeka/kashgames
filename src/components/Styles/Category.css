@@ -1,39 +1,124 @@
 .category {
-    padding: 2rem;
+    padding: 50px 0;
   }
   
   .category__title {
-    font-size: 2rem;
-    font-weight: bold;
-    margin-bottom: 1rem;
+    margin-bottom: 30px;
+    font-size: 32px;
+    text-align: center;
   }
   
   .category__grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    grid-gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-gap: 30px;
   }
   
   .category__product {
-    border: 1px solid #ddd;
-    padding: 1rem;
-    text-align: center;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
   }
   
   .category__product-image {
-    max-width: 100%;
+    width: 100%;
     height: auto;
-    margin-bottom: 1rem;
+    margin-bottom: 20px;
   }
   
   .category__product-title {
-    font-size: 1.2rem;
-    margin-bottom: 0.5rem;
+    margin-bottom: 10px;
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
   }
   
   .category__product-price {
-    font-size: 1.2rem;
+    font-size: 20px;
     font-weight: bold;
-    color: #007bff;
+    text-align: center;
+  }
+  
+  .category__product-button {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 10px 20px;
+    background-color: #0077ff;
+    color: #fff;
+    font-size: 18px;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .category__product-button:hover {
+    background-color: #0066cc;
+  }
+  
+  .category__modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .category__modal-content {
+    position: relative;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    max-width: 800px;
+    width: 80%;
+    text-align: center;
+  }
+  
+  .category__modal-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 24px;
+    font-weight: bold;
+    background-color: transparent;
+    color: #000;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .category__modal-close:hover {
+    color: #999;
+  }
+  
+  .category__modal-image {
+    max-width: 50%;
+    height: auto;
+    margin-bottom: 20px;
+  }
+  
+  .category__modal-title {
+    margin-bottom: 10px;
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+  }
+  
+  .category__modal-description {
+    font-size: 18px;
+    line-height: 1.5;
+    text-align: justify;
   }
   
