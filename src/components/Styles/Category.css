@@ -1,5 +1,5 @@
 .category {
-    padding: 50px 0;
+    padding: 60px 0;
   }
   
   .category__title {
@@ -20,29 +20,25 @@
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    padding: 20px;
+    padding: 50px;
     border: 1px solid #ccc;
     border-radius: 5px;
   }
   
   .category__product-image {
-    width: 100%;
+    width: 50%;
     height: auto;
     margin-bottom: 20px;
   }
   
   .category__product-title {
-    margin-bottom: 10px;
-    font-size: 24px;
+    margin-bottom: 20px;
+    font-size: 15px;
     font-weight: bold;
     text-align: center;
   }
   
-  .category__product-price {
-    font-size: 20px;
-    font-weight: bold;
-    text-align: center;
-  }
+  
   
   .category__product-button {
     position: absolute;
@@ -104,7 +100,7 @@
   }
   
   .category__modal-image {
-    max-width: 50%;
+    max-width: 30%;
     height: auto;
     margin-bottom: 20px;
   }

@@ -34,7 +34,7 @@ function Category() {
             <div className="category__product" key={product.id}>
               <img src={product.image} alt={product.title} className="category__product-image" />
               <h3 className="category__product-title">{product.title}</h3>
-              <p className="category__product-price">${product.price}</p>
+             
               <button className="category__product-button" onClick={() => handlePlayClick(product)}>Play</button>
             </div>
           ))}
