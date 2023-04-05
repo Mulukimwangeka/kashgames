@@ -1,6 +1,6 @@
 /* Header */
 .header {
-  background-image: url("https://wallpaperaccess.com/full/1513454.jpg");
+  background-image: url("https://wallpaper-house.com/data/out/6/wallpaper2you_95829.jpg");
   padding: 150px;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
   background-size: cover;
@@ -24,10 +24,11 @@
 
 /* Header brand name */
 .header__brand-name {
-  font-size: 24px;
-  font-weight: bold;
-  color: #333;
+  font-size: 30px;
+  font-weight: 600;
+  color:whitesmoke;
   margin: 0;
+  
 }
 
 /* Header navigation */
@@ -54,7 +55,7 @@
   text-decoration: none;
   font-size: 16px;
   font-weight: bold;
-  color: #333;
+  color:white;
   padding: 8px;
   border-radius: 4px;
   transition: background-color 0.2s ease;
@@ -62,63 +63,6 @@
 
 /* Header navigation link hover */
 .header__nav-link:hover {
-  background-color: #ddd;
+  background-color: #706e6e;
 }
 
-/* Dropdown */
-.dropdown {
-  position: relative;
-  display: inline-block;
-}
-
-/* Dropdown button */
-.dropbtn {
-  background-color: transparent;
-  color: #333;
-  font-size: 16px;
-  font-weight: bold;
-  border: none;
-  cursor: pointer;
-  padding: 8px;
-  border-radius: 4px;
-  transition: background-color 0.2s ease;
-}
-
-/* Dropdown button hover */
-.dropbtn:hover {
-  background-color: #ddd;
-}
-
-/* Dropdown content */
-.dropdown-content {
-  display: none;
-  position: absolute;
-  z-index: 1;
-  min-width: 160px;
-  border-radius: 4px;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-  background-color: #fff;
-  padding: 8px;
-}
-
-/* Dropdown content link */
-.dropdown-content a {
-  display: block;
-  text-decoration: none;
-  font-size: 16px;
-  font-weight: bold;
-  color: #333;
-  padding: 8px;
-  border-radius: 4px;
-  transition: background-color 0.2s ease;
-}
-
-/* Dropdown content link hover */
-.dropdown-content a:hover {
-  background-color: #ddd;
-}
-
-/* Show the dropdown menu on hover */
-.dropdown:hover .dropdown-content {
-  display: block;
-}
