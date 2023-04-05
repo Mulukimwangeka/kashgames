@@ -13,6 +13,7 @@ function App() {
   return (
     <div className="App">
       <Header />
+  
       <Routes>
         <Route exact path="/" element={<Gamelist />} />
         <Route path="/game/:id" element={<Gamedetails />} />
