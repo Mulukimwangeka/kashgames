@@ -1,66 +1,41 @@
-/* Header */
 .header {
-  background-image: url("https://wallpaper-house.com/data/out/10/wallpaper2you_381725.jpg");
-  padding: 180px;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-  background-size: cover;
-  background-position: center;
-}
+  background-image: url('https://wallpaperset.com/w/full/6/6/e/544352.jpg');
+  padding: 150px;
+  text-align: center;
+  background-position: center center;
+  font-weight: 700;
+  color: black;
+  color: #fff;
+  }
 
-/* Header container */
-.container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  max-width: 1200px;
-  margin: 0 auto;
-}
 
-/* Header brand */
-.header__brand {
-  display: flex;
-  align-items: center;
-}
 
-/* Header brand name */
-.header__brand-name {
-  font-size: 30px;
-  font-weight: 600;
-  color:black;
-  margin: 0;
-  
-}
-
-/* Header navigation */
 .header__nav {
-  display: flex;
-  align-items: center;
+  background-color: #333;
+  color: #fff;
+  padding: 10px 0;
 }
 
-/* Header navigation menu */
 .header__nav-menu {
-  display: flex;
   list-style: none;
   margin: 0;
   padding: 0;
+  display: flex;
+  justify-content: center;
 }
 
-/* Header navigation item */
 .header__nav-item {
-  margin-left: 24px;
+  margin-right: 20px;
 }
 
-/* Header navigation link */
 .header__nav-link {
+  color: #fff;
   text-decoration: none;
-  font-size: 20px;
-  font-weight: bold;
-  color:rgb(107, 222, 250);
- 
+  padding: 10px;
 }
 
-/* Header navigation link hover */
-.header__nav-link:hover {
-  background-color: whitesmoke;
+.header__nav-link:hover,
+.header__nav-link.active {
+  background-color: #fff;
+  color: #333;
 }
-
