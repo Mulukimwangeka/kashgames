@@ -22,7 +22,7 @@ function Header() {
       <header className="header">
         <div className="container">
           <div className="header__brand">
-            <h1 className="header__brand-name">Kashgames</h1>
+            <h1 className="header__brand-name">KashGames</h1>
           </div>
         </div>
       </header>

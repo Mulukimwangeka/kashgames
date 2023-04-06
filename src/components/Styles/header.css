@@ -1,13 +1,16 @@
 .header {
-  background-image: url('https://wallpaperset.com/w/full/6/6/e/544352.jpg');
+  background-image: url('https://wallpaperset.com/w/full/f/f/5/177539.jpg');
   padding: 150px;
   text-align: center;
   background-position: center center;
   font-weight: 700;
-  color: black;
-  color: #fff;
   }
 
+.header__brand-name{
+  color: black;
+  font-size: 30px;
+
+}
 
 
 .header__nav {
