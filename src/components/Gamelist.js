@@ -23,7 +23,6 @@ function GamesList() {
           key={game.id}
           title={game.title}
           image={game.image}
-          description={game.description}
           price={game.price}
         />
       ))}
