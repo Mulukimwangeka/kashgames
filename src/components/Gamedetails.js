@@ -47,7 +47,7 @@ function GameDetails({ title, description, image, onClose }) {
             </label>
             <button type="submit">Subscribe and Play</button>
           </form>
-          <button className="game-details__close" onClick={() => setShowPhoneForm(false)}>X</button>
+          <button className="game-details__close2" onClick={() => setShowPhoneForm(false)}>X</button>
         </div>
       )}
     </div>
