@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './Styles/Gamecard.css';
 import GameDetails from './Gamedetails';
 
-function Gamecard({ title, image, description, price }) {
+function Gamecard({ title, image, description }) {
   const [showModal, setShowModal] = useState(false);
 
   const handlePlayNow = () => {
@@ -19,7 +19,7 @@ function Gamecard({ title, image, description, price }) {
       <div className="gamecard__content">
         <h3 className="gamecard__title">{title}</h3>
         <button className="gamecard__button" onClick={handlePlayNow}>Play Now</button>
-        {showModal && <GameDetails title={title} image={image} description={description} price={price} onClose={handleClose} />}
+        {showModal && <GameDetails title={title} image={image} description={description}  onClose={handleClose} />}
       </div>
     </div>
   );
