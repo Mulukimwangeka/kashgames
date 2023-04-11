@@ -19,7 +19,7 @@ function Gamecard({ id, title, image, description }) {
       <img src={image} alt={title} className="gamecard__image" />
       <div className="gamecard__content">
         <h3 className="gamecard__title">{title}</h3>
-        <button className="gamecard__button" onClick={handlePlayNow}>Play Now</button>
+        <button className="gamecard__button" onClick={handlePlayNow}>Play</button>
         {showModal && <GameDetails id={id} title={title} image={image} description={description}  onClose={handleClose} />}
       </div>
     </div>
