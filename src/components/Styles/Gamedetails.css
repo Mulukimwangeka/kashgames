@@ -26,7 +26,7 @@
 }
 
 .game-details__image {
-  width: 50%;
+  width: 30%;
   margin-bottom: 10px;
 }
 
@@ -65,7 +65,9 @@
   color: #333;
   border: none;
   cursor: pointer;
+  z-index: 99999; /* add a higher z-index value */
 }
+
 
 .game-details__phone-form {
   background-color: white;
