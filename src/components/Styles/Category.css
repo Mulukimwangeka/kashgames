@@ -1,5 +1,8 @@
 .category {
     padding: 60px 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
   }
   
   .category__title {
