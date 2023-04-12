@@ -1,8 +1,23 @@
+/* Global styles */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+}
+
+/* Header styles */
+
 .header {
-  background-image: url('https://www.pixelstalk.net/wp-content/uploads/images5/Cute-Stitch-Wallpaper-for-Desktop.png');
+  background-image: url('https://wallpaper.dog/large/5457705.jpg');
+  background-position: center center;
+  background-size: cover;
   padding: 200px;
   text-align: center;
-  background-position: center center;
   font-weight: 700;
 }
 
@@ -54,14 +69,18 @@
 @media screen and (max-width: 767px) {
 
   .header {
-    padding: 10px;
-    position: sticky;
+    padding: 30px;
+    position: relative;
     top: 0;
     z-index: 1;
   }
 
+  .header__nav{
+    display: none;
+  }
+
   .header__brand-name {
-    font-size: 24px;
+    margin-bottom: 20px;
   }
 
   .header__nav-menu {
@@ -70,19 +89,22 @@
 
   .header__mobile-menu-btn {
     display: block;
+    position: relative;
+    top: 0;
     background-color: #333;
     color: #fff;
     border: none;
-    padding: 10px;
-    margin-right: 10px;
+    padding: 15px;
+    width: 100%;
+    font-size: 20px;
+    
   }
 
   .header__mobile-nav {
     display: block;
     background-color: #333;
     color: #fff;
-    padding: 10px;
-    margin-top: 10px;
+    padding: 1px;
   }
 
   .header__mobile-nav-menu {
@@ -116,6 +138,10 @@
 }
 
 @media (min-width: 768px) {
+  .header {
+    padding: 200px;
+  }
+  
   .header__mobile-nav {
     display: none;
   }

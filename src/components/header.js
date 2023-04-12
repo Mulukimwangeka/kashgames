@@ -29,14 +29,18 @@ function Header() {
           <div className="header__brand">
             <h1 className="header__brand-name">KashGames</h1>
           </div>
-          <button
+        
+        </div>
+        
+      </header>
+      <div>
+      <button
             className="header__mobile-menu-btn"
             onClick={toggleMobileMenu}
           >
             {showMobileMenu ? 'Close' : 'Menu'}
           </button>
-        </div>
-      </header>
+      </div>
 
       <nav className="header__nav">
         <div className="container">
