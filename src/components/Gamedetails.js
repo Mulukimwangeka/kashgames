@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import './Styles/Gamedetails.css';
 
 function GameDetails({ title, description, image, onClose }) {
   const [showPhoneForm, setShowPhoneForm] = useState(false);
   const [phoneNumber, setPhoneNumber] = useState('');
+  const ref = useRef(null);
 
   const handlePayAndPlay = () => {
     setShowPhoneForm(true);
@@ -25,6 +26,20 @@ function GameDetails({ title, description, image, onClose }) {
     }
   };
 
+  const handleClickOutside = (event) => {
+    if (ref.current && !ref.current.contains(event.target)) {
+      setShowPhoneForm(false);
+      onClose();
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
   return (
     <div className="game-details">
       <div className={`game-details__content ${showPhoneForm ? 'hidden' : ''}`}>
@@ -39,7 +54,7 @@ function GameDetails({ title, description, image, onClose }) {
         </div>
       </div>
       {showPhoneForm && (
-        <div className="game-details__phone-form">
+        <div className="game-details__phone-form" ref={ref}>
           <form onSubmit={handleSubmit}>
             <label className='game-label'>
               Please enter your 10-digit phone number:
@@ -47,7 +62,7 @@ function GameDetails({ title, description, image, onClose }) {
             </label>
             <button type="submit">Subscribe and Play</button>
           </form>
-          <button className="game-details__close2" onClick={() => setShowPhoneForm(false)}>X</button>
+          <button className="game-details__close2" onClick={() => { setShowPhoneForm(false); onClose(); }}>X</button>
         </div>
       )}
     </div>
