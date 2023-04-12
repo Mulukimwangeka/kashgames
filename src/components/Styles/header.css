@@ -13,8 +13,9 @@
 
 .header__brand-name {
   color: black;
-  font-size: 30px;
+  font-size: 50px;
   margin: 0;
+  font-family: 'Alkatra', cursive;
 }
 
 .header__nav {
@@ -67,6 +68,7 @@
 
   .header__brand-name {
     margin-bottom: 20px;
+    font-size: large;
   }
 
   .header__nav-menu {
