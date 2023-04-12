@@ -1,7 +1,16 @@
 .games-list {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin-top: 40px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.game-card {
+  flex: 1 0 50%; /* Set the width to 50% so that two cards can fit per row */
+}
+
+@media (min-width: 768px) {
+  /* Set the breakpoint at 768px to only apply the styles below this width */
+  .game-card {
+    flex-basis: calc(33.33% - 20px); /* Set the width to 33.33% with 20px margin */
+    margin: 10px; /* Set margin for space between cards */
   }
-  
+}

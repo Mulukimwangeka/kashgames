@@ -21,10 +21,12 @@ function GamesList() {
    
       {games.map(game => (
         <GameCard
-          key={game.id}
-          title={game.title}
-          image={game.image}
-        />
+        key={game.id}
+        title={game.title}
+        image={game.image}
+        className="game-card"
+      />
+
       ))}
     </div>
   );
