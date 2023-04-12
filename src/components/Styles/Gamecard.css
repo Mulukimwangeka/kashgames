@@ -48,3 +48,32 @@
 .gamecard__button:hover {
   background-color: #0052a3;
 }
+
+@media only screen and (max-width: 776px) {
+  .gamecard {
+  width: 90%;
+  height: auto;
+  margin: 10px auto;
+  }
+  
+  .gamecard__image {
+  width: 80%;
+  height: auto;
+  margin-bottom: 10px;
+  }
+  
+  .gamecard__content {
+  padding: 10px;
+  height: auto;
+  }
+  
+  .gamecard__title {
+  font-size: 12px;
+  margin-bottom: 10px;
+  }
+  
+  .gamecard__button {
+  padding: 8px 15px;
+  font-size: 12px;
+  }
+  }

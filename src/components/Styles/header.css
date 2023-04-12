@@ -86,6 +86,7 @@
     font-family: Arial, Helvetica, sans-serif;
     font-weight: 600;
     margin-top: 0;
+    text-align: left;
     
   }
 
@@ -111,7 +112,7 @@
   .header__mobile-nav-link {
     display: block;
     padding: 10px;
-    text-align: center;
+    text-align: left;
     width: 100%;
     color: #faf6f6;
     text-decoration: none;
