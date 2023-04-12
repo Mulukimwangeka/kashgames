@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import './Styles/Gamecard.css';
 import GameDetails from './Gamedetails';
 
-function Gamecard({ id, title, image, description }) {
+function Gamecard({ id, title, image,description }) {
   const [showModal, setShowModal] = useState(false);
+
 
   const handlePlayNow = () => {
     setShowModal(true);

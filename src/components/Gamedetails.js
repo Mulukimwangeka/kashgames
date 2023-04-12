@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import './Styles/Gamedetails.css';
 
-function GameDetails({ title, description, image, onClose }) {
+function GameDetails({ title,description, image, onClose }) {
   const [showPhoneForm, setShowPhoneForm] = useState(false);
   const [phoneNumber, setPhoneNumber] = useState('');
   const ref = useRef(null);
@@ -46,6 +46,7 @@ function GameDetails({ title, description, image, onClose }) {
         <img src={image} alt={title} className="game-details__image" />
         <div className="game-details__info">
           <h3 className="game-details__title">{title}</h3>
+          
           <p className="game-details__description">{description}</p>
           <div className="game-details__buttons">
             <button className="game-details__button" onClick={handlePayAndPlay}>Pay &amp; Play</button>

@@ -46,11 +46,11 @@ function Header() {
         <div className="container">
           <ul className="header__nav-menu">
             <li className="header__nav-item">
-              <NavLink exact to="/" className="header__nav-link" activeClassName="active">All Games</NavLink>
+              <NavLink exact to="/" className="header__nav-link" activeclassName="active">All Games</NavLink>
             </li>
             {categories.map((category) => (
               <li className="header__nav-item" key={category}>
-                <NavLink to={`/category/${category}`} className="header__nav-link" activeClassName="active">{category}</NavLink>
+                <NavLink to={`/category/${category}`} className="header__nav-link" activelassName="active">{category}</NavLink>
               </li>
             ))}
           </ul>
