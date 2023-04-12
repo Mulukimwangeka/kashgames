@@ -194,3 +194,29 @@
     background-color: #3e8e41;
   }
   
+  @media only screen and (max-width: 767px) {
+    .category{
+      padding: 20px;
+    }
+    .category__grid {
+      grid-template-columns: repeat(auto-fit, minmax(45%, 1fr));
+    }
+
+    .category__product {
+      padding: 20px;
+    }
+
+    .category__product-image {
+      width: 30%;
+      height: 30%;
+    }
+
+    .category__product-title {
+      font-size: 10px;
+      margin-bottom :1cm;
+    }
+
+    .category__product-button {
+      font-size: 10px;
+    }
+  }
