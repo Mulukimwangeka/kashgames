@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { NavLink, useParams } from 'react-router-dom';
 import './Styles/header.css';
 import Category from './category';
+import { baseUrl } from './util/commonutil';
 
 function Header() {
   const [categories, setCategories] = useState([]);
@@ -10,7 +11,14 @@ function Header() {
 
   useEffect(() => {
     const fetchCategories = async () => {
-      const response = await fetch('https://fakestoreapi.com/products/categories');
+      const apiEndpoint = '/api/v1/categories/all';
+      const fullEndpoint = `${baseUrl}${apiEndpoint}`;
+      const config = {
+        headers: {
+          "ngrok-skip-browser-warning": "69420",
+        },
+      };
+      const response = await fetch(fullEndpoint, config);
       const data = await response.json();
       setCategories(data);
     };
@@ -46,11 +54,11 @@ function Header() {
         <div className="container">
           <ul className="header__nav-menu">
             <li className="header__nav-item">
-              <NavLink exact to="/" className="header__nav-link" activeclassName="active">All Games</NavLink>
+              <NavLink exact to="/" className="header__nav-link" activeClassName="active">All Games</NavLink>
             </li>
             {categories.map((category) => (
-              <li className="header__nav-item" key={category}>
-                <NavLink to={`/category/${category}`} className="header__nav-link" activelassName="active">{category}</NavLink>
+              <li className="header__nav-item" key={category.id}>
+                <NavLink to={`/category/${category.title}`} className="header__nav-link" activeClassName="active">{category.title}</NavLink>
               </li>
             ))}
           </ul>
@@ -72,14 +80,14 @@ function Header() {
               </NavLink>
             </li>
             {categories.map((category) => (
-              <li className="header__mobile-nav-item" key={category}>
+              <li className="header__mobile-nav-item" key={category.id}>
                 <NavLink
-                  to={`/category/${category}`}
+                  to={`/category/${category.title}`}
                   className="header__mobile-nav-link"
                   activeClassName="active"
                   onClick={toggleMobileMenu}
                 >
-                  {category}
+                  {category.title}
                 </NavLink>
               </li>
             ))}
