@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import './Styles/Gamedetails.css';
 
-function GameDetails({ title,description, image, onClose }) {
+function GameDetails({ title,description, images, onClose }) {
   const [showPhoneForm, setShowPhoneForm] = useState(false);
   const [phoneNumber, setPhoneNumber] = useState('');
   const ref = useRef(null);
@@ -43,7 +43,7 @@ function GameDetails({ title,description, image, onClose }) {
   return (
     <div className="game-details">
       <div className={`game-details__content ${showPhoneForm ? 'hidden' : ''}`}>
-        <img src={image} alt={title} className="game-details__image" />
+        <img src={images} alt={title} className="game-details__image" />
         <div className="game-details__info">
           <h3 className="game-details__title">{title}</h3>
           

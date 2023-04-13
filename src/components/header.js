@@ -38,7 +38,7 @@ function Header() {
             className="header__mobile-menu-btn"
             onClick={toggleMobileMenu}
           >
-            {showMobileMenu ? 'Close' : 'Menu'}
+            {showMobileMenu ? 'Exit' : 'Categories of Games'}
           </button>
       </div>
 

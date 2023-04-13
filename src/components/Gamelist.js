@@ -7,7 +7,7 @@ function GamesList() {
 
   useEffect(() => {
     async function fetchGames() {
-      const response = await fetch('https://fakestoreapi.com/products');
+      const response = await fetch('https://api.escuelajs.co/api/v1/products');
       const data = await response.json();
       setGames(data);
     }
@@ -23,7 +23,7 @@ function GamesList() {
         <GameCard
         key={game.id}
         title={game.title}
-        image={game.image}
+        images={game.images}
         className="game-card"
       />
 
