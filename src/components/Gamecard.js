@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './Styles/Gamecard.css';
 import GameDetails from './Gamedetails';
 
-function GameCard({ id, title, images, description }) {
+function GameCard({ id, title, images, description, subscriberId, productID }) {
   const [showModal, setShowModal] = useState(false);
 
   const handlePlayNow = () => {
@@ -28,6 +28,8 @@ function GameCard({ id, title, images, description }) {
             title={title}
             images={images}
             description={description}
+            subscriberId={subscriberId}
+            productID={productID}
             onClose={handleClose}
           />
         )}

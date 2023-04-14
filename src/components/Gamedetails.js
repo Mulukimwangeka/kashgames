@@ -1,34 +1,71 @@
 import React, { useState, useRef, useEffect } from 'react';
 import './Styles/Gamedetails.css';
+import { baseUrl } from './util/commonutil';
 
-function GameDetails({ title,description, images, onClose }) {
+function GameDetails({ title, description, images, onClose, subscriberId }) {
   const [showPhoneForm, setShowPhoneForm] = useState(false);
   const [phoneNumber, setPhoneNumber] = useState('');
-  const ref = useRef(null);
+  const [productID, setProductID] = useState('');
 
-  const handlePayAndPlay = () => {
-    setShowPhoneForm(true);
-  };
+  const ref = useRef(null);
 
   const handlePhoneNumberChange = (event) => {
     setPhoneNumber(event.target.value);
   };
 
-  const handleSubmit = (event) => {
+  const handlePayAndPlay = (productID) => {
+    setProductID(productID);
+    setShowPhoneForm(true);
+  };
+  
+  const handleSubmit = async (event) => {
     event.preventDefault();
     if (phoneNumber.length === 10) {
-      // Call an API to subscribe the user and enable them to play the game
-      alert(`You have subscribed with phone number ${phoneNumber} and can now play the game!`);
-      setShowPhoneForm(false);
-      onClose();
+      const apiEndpoint = '/api/v1/subs/check';
+      const fullEndpoint = `${baseUrl}${apiEndpoint}`;
+      const config = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'ngrok-skip-browser-warning': '69420',
+        },
+        body: JSON.stringify({
+          game: title,
+          productID: productID,
+          phone: phoneNumber,
+          subscriberId: subscriberId,
+        }),
+      };
+      try {
+        const response = await fetch(fullEndpoint, config);
+        if (response.ok) {
+          const data = await response.json();
+          if (data.subscribed) {
+            alert(`You are subscribed to ${title} and can now play the game!`);
+            setShowPhoneForm(false);
+            onClose();
+          } else {
+            alert(`Sorry, you are not subscribed to ${title}.`);
+          }
+        } else {
+          alert('Error checking subscription status. Please try again later.');
+        }
+      } catch (error) {
+        alert('Error checking subscription status. Please try again later.');
+        console.error(error);
+      }
     } else {
       alert('Please enter a valid 10-digit phone number.');
     }
   };
-
+  
+  
   const handleClickOutside = (event) => {
     if (ref.current && !ref.current.contains(event.target)) {
+      
+
       setShowPhoneForm(false);
+      
       onClose();
     }
   };
@@ -38,7 +75,8 @@ function GameDetails({ title,description, images, onClose }) {
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, []);
+  }, [handleClickOutside]);
+  
 
   return (
     <div className="game-details">
@@ -46,10 +84,10 @@ function GameDetails({ title,description, images, onClose }) {
         <img src={images} alt={title} className="game-details__image" />
         <div className="game-details__info">
           <h3 className="game-details__title">{title}</h3>
-          
+
           <p className="game-details__description">{description}</p>
           <div className="game-details__buttons">
-            <button className="game-details__button" onClick={handlePayAndPlay}>Pay &amp; Play</button>
+            <button className="game-details__button" onClick={() => handlePayAndPlay(productID)}>Pay &amp; Play</button>
           </div>
           <button className="game-details__close" onClick={onClose}>X</button>
         </div>
