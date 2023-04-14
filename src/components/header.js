@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { NavLink, useParams } from 'react-router-dom';
 import './Styles/header.css';
-import Category from './category';
 import { baseUrl } from './util/commonutil';
+import Category from './category';
 
 function Header() {
   const [categories, setCategories] = useState([]);
-  const { category } = useParams();
+  const { categoryId } = useParams();
   const [showMobileMenu, setShowMobileMenu] = useState(false);
 
   useEffect(() => {
@@ -30,6 +30,10 @@ function Header() {
     setShowMobileMenu(!showMobileMenu);
   };
 
+  const handleCategoryClick = (categoryId) => {
+    // handle category click without history
+  };
+
   return (
     <>
       <header className="header">
@@ -42,12 +46,12 @@ function Header() {
         
       </header>
       <div>
-      <button
-            className="header__mobile-menu-btn"
-            onClick={toggleMobileMenu}
-          >
-            {showMobileMenu ? 'Exit' : 'Categories of Games ☰ '}
-          </button>
+        <button
+          className="header__mobile-menu-btn"
+          onClick={toggleMobileMenu}
+        >
+          {showMobileMenu ? 'Exit' : 'Categories of Games ☰ '}
+        </button>
       </div>
 
       <nav className="header__nav">
@@ -58,7 +62,14 @@ function Header() {
             </li>
             {categories.map((category) => (
               <li className="header__nav-item" key={category.id}>
-                <NavLink to={`/category/${category.title}`} className="header__nav-link" activeClassName="active">{category.title}</NavLink>
+                <NavLink 
+                  to={`/category/${category.id}`} 
+                  className="header__nav-link" 
+                  activeClassName="active"
+                  onClick={() => handleCategoryClick(category.id)}
+                >
+                  {category.title}
+                </NavLink>
               </li>
             ))}
           </ul>
@@ -82,10 +93,10 @@ function Header() {
             {categories.map((category) => (
               <li className="header__mobile-nav-item" key={category.id}>
                 <NavLink
-                  to={`/category/${category.title}`}
+                  to={`/category/${category.id}`}
                   className="header__mobile-nav-link"
                   activeClassName="active"
-                  onClick={toggleMobileMenu}
+                  onClick={() => handleCategoryClick(category.id)}
                 >
                   {category.title}
                 </NavLink>
@@ -95,7 +106,7 @@ function Header() {
         </nav>
       )}
 
-      {category ? <Category /> : null}
+      {categoryId ? <Category categoryId={categoryId} /> : null}
     </>
   );
 }

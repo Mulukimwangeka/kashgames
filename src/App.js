@@ -20,7 +20,8 @@ function App() {
         <Route path="/subscription" element={<Subscription />} />
         <Route path="/search" element={<Search />} />
         <Route path="/filter" element={<Filter />} />
-        <Route path="/category/:category" element={<Category />} />
+        <Route path="/category/:categoryId" element={<Category/>} />
+
       </Routes>
     </div>
   );
