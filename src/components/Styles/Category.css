@@ -1,5 +1,7 @@
-.category{
-display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-}
+.category__game-list {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 20px;
+    justify-items: center;
+  }
+  

@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import Game from './Gamecard';
-import { baseUrl } from './util/commonutil';
+import { baseUrl } from './util/commonutil'
+import './Styles/Category.css'
 
 function Category(props) {
   const [games, setGames] = useState([]);
