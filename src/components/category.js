@@ -24,6 +24,7 @@ function Category(props) {
 
     fetchGames();
   }, [categoryId]);
+  
 
   return (
     <div className="category">
@@ -33,11 +34,12 @@ function Category(props) {
           {games.length > 0 ? (
             games.map((game) => (
               <Game
-  key={game.id}
-  id={game.id}
-  title={game.title}
-  images={game.imageUrl}
-/>
+          key={game.id}
+          id={game.id}
+          title={game.title}
+          
+          images={game.image}
+        />
 
             ))
           ) : (
