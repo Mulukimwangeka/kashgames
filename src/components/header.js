@@ -31,6 +31,7 @@ function Header() {
   };
 
   const handleCategoryClick = (categoryId) => {
+    setShowMobileMenu(false); // close mobile menu
     // handle category click without history
   };
 

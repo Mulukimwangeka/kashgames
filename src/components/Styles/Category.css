@@ -1,7 +1,18 @@
 .category__game-list {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 20px;
-    justify-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .game-card {
+    width: calc(50% - 20px); /* set the width to 50% minus the margin */
+    margin: 10px;
+  }
+  
+  @media screen and (min-width: 600px) {
+    /* for screens wider than 600px */
+    .game-card {
+      width: calc(20% - 20px); /* set the width to 20% minus the margin */
+    }
   }
   
