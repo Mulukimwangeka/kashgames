@@ -29,7 +29,7 @@ function GameDetails({ title, description, images, onClose, productId }) {
           'ngrok-skip-browser-warning': '69420',
         },
         body: JSON.stringify({
-          productID: productId,
+          productId: productId,
           subscriberId: phoneNumber,
         }),
       };
