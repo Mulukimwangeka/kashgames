@@ -34,6 +34,7 @@ function GamesList() {
             title={game.title}
             images={game.image}
             description={game.description}
+            productID={game.productId}
             className="game-card"
           />
         ))

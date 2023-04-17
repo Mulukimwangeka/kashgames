@@ -15,6 +15,7 @@ function GameDetails({ title, description, images, onClose, productId }) {
 
   const handlePayAndPlay = (productId) => {
     setShowPhoneForm(true);
+    console.log(productId)
     setProductId(productId);
   };
   
@@ -31,33 +32,31 @@ function GameDetails({ title, description, images, onClose, productId }) {
           'ngrok-skip-browser-warning': '69420',
         },
         body: JSON.stringify({
-          productId: productID,
+          productId: productID, // Use the productID state variable here
           subscriberId: phoneNumber,
         }),
       };
-      try {
-        const response = await fetch(fullEndpoint, config);
-        if (response.ok) {
-          const data = await response.json();
-          if (data.subscribed) {
-            alert(`You are subscribed to ${title} and can now play the game!`);
-            setShowPhoneForm(false);
-            onClose();
-          } else {
-            alert(`Sorry, you are not subscribed to ${title}.`);
-          }
-        } else {
-          alert('Error checking subscription status. Please try again later.');
-        }
-      } catch (error) {
+      // Make API call to check subscription status
+      const response = await fetch(fullEndpoint, config).catch(error => {
         alert('Error checking subscription status. Please try again later.');
         console.error(error);
+      });
+      if (response.ok) {
+        const data = await response.json();
+        if (data.subscribed) {
+          alert(`You are subscribed to ${title} and can now play the game!`);
+          setShowPhoneForm(false);
+          onClose();
+        } else {
+          alert(`Sorry, you are not subscribed to ${title}.`);
+        }
+      } else {
+        alert('Error checking subscription status. Please try again later.');
       }
     } else {
       alert('Please enter a valid 10-digit phone number.');
     }
   };
-  
   
   const handleClickOutside = (event) => {
     if (ref.current && !ref.current.contains(event.target)) {
