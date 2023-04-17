@@ -2,10 +2,10 @@ import React, { useState, useRef, useEffect } from 'react';
 import './Styles/Gamedetails.css';
 import { baseUrl } from './util/commonutil';
 
-function GameDetails({ title, description, images, onClose, subscriberId }) {
+function GameDetails({ title, description, images, onClose, productId }) {
   const [showPhoneForm, setShowPhoneForm] = useState(false);
   const [phoneNumber, setPhoneNumber] = useState('');
-  const [productID, setProductID] = useState('');
+  const [productID,setProductId] = useState(productId); // Set the initial value of productID to the productId prop
 
   const ref = useRef(null);
 
@@ -13,10 +13,11 @@ function GameDetails({ title, description, images, onClose, subscriberId }) {
     setPhoneNumber(event.target.value);
   };
 
-  const handlePayAndPlay = (productID) => {
-    setProductID(productID);
+  const handlePayAndPlay = (productId) => {
     setShowPhoneForm(true);
+    setProductId(productId);
   };
+  
   
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -30,10 +31,8 @@ function GameDetails({ title, description, images, onClose, subscriberId }) {
           'ngrok-skip-browser-warning': '69420',
         },
         body: JSON.stringify({
-          game: title,
-          productID: productID,
-          phone: phoneNumber,
-          subscriberId: subscriberId,
+          productId: productID,
+          subscriberId: phoneNumber,
         }),
       };
       try {

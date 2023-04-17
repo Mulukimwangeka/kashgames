@@ -2,19 +2,19 @@ import React, { useState } from 'react';
 import './Styles/Gamecard.css';
 import GameDetails from './Gamedetails';
 
-function GameCard({ id, title, images, description, subscriberId, productID }) {
+function GameCard({ id, title, images, description, subscriberId, productId }) {
   const [showModal, setShowModal] = useState(false);
 
   const handlePlayNow = () => {
     setShowModal(true);
   };
 
-  const handleClose = () => {
+  const handleClose = (event) => {
     setShowModal(false);
   };
 
   return (
-    <div className="game-card">
+    <div className="game-card" data-subscriber-id={subscriberId} data-product-id={productId}>
       <img src={images} alt={title} className="game-card__image" />
       <div className="game-card__content">
         <h3 className="game-card__title">{title}</h3>
@@ -24,13 +24,12 @@ function GameCard({ id, title, images, description, subscriberId, productID }) {
         </button>
         {showModal && (
           <GameDetails
-            id={id}
             title={title}
-            images={images}
             description={description}
+            images={images}
+            onClose={(event) => handleClose(event)}
             subscriberId={subscriberId}
-            productID={productID}
-            onClose={handleClose}
+            productId={productId} // Pass the productId prop to GameDetails
           />
         )}
       </div>
