@@ -21,6 +21,7 @@ function GameDetails({ title, description, images, onClose, productId }) {
   const handleSubmit = async (event) => {
     event.preventDefault();
     if (phoneNumber.length === 10) {
+      const formattedPhoneNumber = '254' + phoneNumber.slice(1);
       const apiEndpoint = '/api/v1/subs/check';
       const fullEndpoint = `${baseUrl}${apiEndpoint}`;
       const config = {
@@ -31,7 +32,7 @@ function GameDetails({ title, description, images, onClose, productId }) {
         },
         body: JSON.stringify({
           productId: productId,
-          subscriberId: phoneNumber,
+          subscriberId: formattedPhoneNumber,
         }),
       };
       const response = await fetch(fullEndpoint, config).catch((error) => {
@@ -50,6 +51,8 @@ function GameDetails({ title, description, images, onClose, productId }) {
       alert('Please enter a valid 10-digit phone number.');
     }
   };
+  
+  
 
   const handleClickOutside = (event) => {
     if (ref.current && !ref.current.contains(event.target)) {
