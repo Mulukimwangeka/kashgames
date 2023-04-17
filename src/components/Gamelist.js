@@ -26,6 +26,7 @@ function GamesList() {
   }, []);
 
   return (
+    
     <div className="games-list">
       {games && games.length > 0 ? (
         games.map(game => (
@@ -34,9 +35,10 @@ function GamesList() {
             title={game.title}
             images={game.image}
             description={game.description}
-            productID={game.productId}
+            productId={game.productId}
             className="game-card"
           />
+          
         ))
       ) : (
         <p>Loading games...</p>
