@@ -2,7 +2,9 @@ import React, { useState } from 'react';
 import './Styles/Gamecard.css';
 import GameDetails from './Gamedetails';
 
-function GameCard({ id, title, images, description, subscriberId, productId }) {
+function GameCard({id ,title, images, description, subscriberId, productId }) {
+    console.log(productId); // Add this line
+
   const [showModal, setShowModal] = useState(false);
 
   const handlePlayNow = () => {
@@ -31,7 +33,7 @@ function GameCard({ id, title, images, description, subscriberId, productId }) {
             images={images}
             onClose={(event) => handleClose(event)}
             subscriberId={subscriberId}
-            productId={productId} // Pass the productId prop to GameDetails
+            productId={productId} 
           />
         )}
       </div>

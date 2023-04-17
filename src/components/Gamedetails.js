@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import GameCard from './Gamecard';
 import './Styles/Gamedetails.css';
 import { baseUrl } from './util/commonutil';
 
