@@ -15,3 +15,35 @@
     margin: 10px; /* Set margin for space between cards */
   }
 }
+
+.loading {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.loading p {
+  display: inline-block;
+  text-transform: uppercase;
+  font-size: 24px;
+  font-family: Arial;
+  font-weight: 600;
+  color: #121212;
+  -webkit-text-stroke: 2px gray;
+  animation: loading 1s ease-in-out infinite;
+  opacity: 0;
+}
+
+@keyframes loading {
+  0% {
+    opacity: 0;
+    transform: translateY(-50px);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+}

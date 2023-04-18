@@ -41,7 +41,10 @@ function GamesList() {
           
         ))
       ) : (
-        <p>Loading games...</p>
+        <div class="loading">
+  <p>Loading games...</p>
+</div>
+
       )}
     </div>
   );
