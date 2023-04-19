@@ -1,5 +1,4 @@
 import React, { useState, useRef, useEffect } from 'react';
-import GameCard from './Gamecard';
 import './Styles/Gamedetails.css';
 import { baseUrl } from './util/commonutil';
 
@@ -7,6 +6,8 @@ function GameDetails({ title, description, images, onClose, productId }) {
   const [phoneNumber, setPhoneNumber] = useState('');
   const [showPhoneForm, setShowPhoneForm] = useState(false);
   const [subscribed, setSubscribed] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(true);
+
   const ref = useRef(null);
 
   const handlePhoneNumberChange = (event) => {
@@ -20,47 +21,71 @@ function GameDetails({ title, description, images, onClose, productId }) {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    if (phoneNumber.length === 10) {
-      const formattedPhoneNumber = '254' + phoneNumber.slice(1);
-      const apiEndpoint = '/api/v1/subs/check';
-      const fullEndpoint = `${baseUrl}${apiEndpoint}`;
-      const config = {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'ngrok-skip-browser-warning': '69420',
-        },
-        body: JSON.stringify({
-          productId: productId,
-          subscriberId: formattedPhoneNumber,
-        }),
-      };
-      const response = await fetch(fullEndpoint, config).catch((error) => {
-        alert('Error checking subscription status. Please try again later.');
-        console.error(error);
-      });
-      if (response.ok) {
-        const data = await response.json();
-        setSubscribed(data.subscribed);
-        setShowPhoneForm(false);
-        onClose();
-      } else {
-        alert('Error checking subscription status. Please try again later.');
-      }
+    const apiEndpoint = '/api/v1/subs/check';
+    const fullEndpoint = `${baseUrl}${apiEndpoint}`;
+    const config = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'ngrok-skip-browser-warning': '69420',
+      },
+      body: JSON.stringify({
+        productId: productId,
+        phoneNumber: `254${phoneNumber.slice(1)}`,
+      }),
+    };
+    const response = await fetch(fullEndpoint, config).catch((error) => {
+      alert('Error charging your account. Please try again later.');
+      console.error(error);
+    });
+    if (response.ok) {
+      const data = await response.json();
+      setSubscribed(true);
+      setShowPhoneForm(false);
+      alert(`You have been subscribed to ${title}!`);
     } else {
-      alert('Please enter a valid 10-digit phone number.');
+      alert('Error charging your account. Please try again later.');
+    }
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
+
+
+  const handlePlayGame = async () => {
+    const apiEndpoint = '/api/v1/game/play';
+    const fullEndpoint = `${baseUrl}${apiEndpoint}`;
+    const config = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'ngrok-skip-browser-warning': '69420',
+      },
+      body: JSON.stringify({
+        productId: productId,
+        subscriberId: `254${phoneNumber.slice(1)}`,
+      }),
+    };
+    const response = await fetch(fullEndpoint, config).catch((error) => {
+      alert('Error playing game. Please try again later.');
+      console.error(error);
+    });
+    if (response.ok) {
+      const data = await response.json();
+      alert(`You have successfully played ${title}!`);
+    } else {
+      alert('Error playing game. Please try again later.');
     }
   };
   
-  
-
   const handleClickOutside = (event) => {
     if (ref.current && !ref.current.contains(event.target)) {
       setShowPhoneForm(false);
       onClose();
     }
   };
-
+  
   useEffect(() => {
     document.addEventListener('mousedown', handleClickOutside);
     return () => {
@@ -68,46 +93,42 @@ function GameDetails({ title, description, images, onClose, productId }) {
     };
   }, []);
 
+  
+  
   return (
-    <div className="game-details">
-      <div className={`game-details__content ${showPhoneForm ? 'hidden' : ''}`}>
-        <img src={images} alt={title} className="game-details__image" />
-        <div className="game-details__info">
-          <h3 className="game-details__title">{title}</h3>
-          <p className="game-details__description">{description}</p>
-          <div className="game-details__buttons">
-            <button className="game-details__button" onClick={handlePayAndPlay}>
-              Pay &amp; Play
-            </button>
+    <>
+      {isModalOpen && (
+        <div className={`game-details${showPhoneForm ? ' expanded' : ''}`}>
+          <button className="game-details__close" onClick={handleCloseModal}>x</button>
+          <div className="game-details__content">
+            <img src={images} alt={title} className="game-details__image" />
+            <div className="game-details__info">
+              <h3 className="game-details__title">{title}</h3>
+              <p className="game-details__description">{description}</p>
+              {!subscribed && (
+                <div className="game-details__phone-form" ref={ref}>
+                  {showPhoneForm ? (
+                    <form onSubmit={handleSubmit}>
+                      <label className="game-label">
+                        Enter your phone number to play the game:
+                        <input type="tel" value={phoneNumber} onChange={handlePhoneNumberChange}
+                          className="game-details__phone-input" required />
+                      </label>
+                      <button type="submit" className="game-details__phone-button">Submit</button>
+                    </form>
+                  ) : (
+                    <button onClick={handlePayAndPlay} className="game-details__phone-button"> Play</button>
+                  )}
+                </div>
+              )}
+              {subscribed && (
+                <button onClick={handlePlayGame} className="game-details__phone-button">Play Game</button>
+              )}
+            </div>
           </div>
-          <button className="game-details__close" onClick={onClose}>
-            X
-          </button>
-        </div>
-      </div>
-      {showPhoneForm && (
-        <div className="game-details__phone-form" ref={ref}>
-          <form onSubmit={handleSubmit}>
-            <label className="game-label">
-              Please enter your 10-digit phone number:
-              <input type="tel" value={phoneNumber} onChange={handlePhoneNumberChange} />
-            </label>
-            <button type="submit">Subscribe and Play</button>
-          </form>
-          <button className="game-details__close2" onClick={() => setShowPhoneForm(false)}>
-            X
-          </button>
         </div>
       )}
-      {subscribed && (
-        <div className="game-details__subscribed">
-          <p>You are subscribed to {title} and can now play the game!</p>
-          <button className="game-details__close2" onClick={() => setSubscribed(false)}>
-            X
-          </button>
-        </div>
-      )}
-    </div>
+    </>
   );
 }
 

@@ -3,8 +3,6 @@ import './Styles/Gamecard.css';
 import GameDetails from './Gamedetails';
 
 function GameCard({id ,title, images, description, subscriberId, productId }) {
-    console.log(productId); // Add this line
-
   const [showModal, setShowModal] = useState(false);
 
   const handlePlayNow = () => {
@@ -16,7 +14,6 @@ function GameCard({id ,title, images, description, subscriberId, productId }) {
   };
 
   return (
-    
     <div className="game-card" data-subscriber-id={subscriberId} data-product-id={productId}>
       <img src={images} alt={title} className="game-card__image" />
       <div className="game-card__content">
@@ -26,15 +23,16 @@ function GameCard({id ,title, images, description, subscriberId, productId }) {
           Play
         </button>
         {showModal && (
-          
-          <GameDetails
-            title={title}
-            description={description}
-            images={images}
-            onClose={(event) => handleClose(event)}
-            subscriberId={subscriberId}
-            productId={productId} 
-          />
+          <div className="overlay">
+            <GameDetails
+              title={title}
+              description={description}
+              images={images}
+              onClose={(event) => handleClose(event)}
+              subscriberId={subscriberId}
+              productId={productId} 
+            />
+          </div>
         )}
       </div>
     </div>
