@@ -22,39 +22,42 @@ function GameDetails({ title, description, images, onClose, productId ,subscribe
   const handleSubmit = async (event) => {
     event.preventDefault();
     if (!subscribed) {
-      const subscribe = window.confirm(
-        `You are about to subscribe to ${title}. Do you want to continue?`
-      );
-      if (!subscribe) {
-        return;
+      const apiEndpoint = '/api/v1/subs/check';
+      const fullEndpoint = `${baseUrl}${apiEndpoint}`;
+      const config = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'ngrok-skip-browser-warning': '69420',
+        },
+        body: JSON.stringify({
+          productId: productId,
+          subscriberId: `254${phoneNumber.slice(1)}`,
+        }),
+      };
+      const response = await fetch(fullEndpoint, config).catch((error) => {
+        alert('Error charging your account. Please try again later.');
+        console.error(error);
+      });
+      if (response.ok) {
+        const data = await response.json();
+        setSubscribed(true);
+        setShowPhoneForm(false);
+        alert(`You have successfully subscribed to ${title}!`);
+      } else {
+        const subscribe = window.confirm(
+          `You need to subscribe to ${title} to play this game. Would you like to subscribe now?`
+        );
+        if (subscribe) {
+          // Call the handleSubmit function again to try subscribing again
+          handleSubmit(event);
+        }
       }
-    }
-    const apiEndpoint = '/api/v1/subs/check';
-    const fullEndpoint = `${baseUrl}${apiEndpoint}`;
-    const config = {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'ngrok-skip-browser-warning': '69420',
-      },
-      body: JSON.stringify({
-        productId: productId,
-        SubscriberId: `254${phoneNumber.slice(1)}`,
-      }),
-    };
-    const response = await fetch(fullEndpoint, config).catch((error) => {
-      alert('Error charging your account. Please try again later.');
-      console.error(error);
-    });
-    if (response.ok) {
-      const data = await response.json();
-      setSubscribed(true);
-      setShowPhoneForm(false);
-      alert(`You have been subscribed to ${title}!`);
     } else {
-      alert('Error charging your account. Please try again later.');
+      alert(`You are already subscribed to ${title}.`);
     }
   };
+  
   
 
   const handleCloseModal = () => {
@@ -62,31 +65,13 @@ function GameDetails({ title, description, images, onClose, productId ,subscribe
   };
 
 
-  const handlePlayGame = async () => {
-    const apiEndpoint = '/api/v1/game/play';
-    const fullEndpoint = `${baseUrl}${apiEndpoint}`;
-    const config = {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'ngrok-skip-browser-warning': '69420',
-      },
-      body: JSON.stringify({
-        productId: productId,
-        subscriberId: `254${phoneNumber.slice(1)}`,
-      }),
-    };
-    const response = await fetch(fullEndpoint, config).catch((error) => {
-      alert('Error playing game. Please try again later.');
-      console.error(error);
-    });
-    if (response.ok) {
-      const data = await response.json();
-      alert(`You have successfully played ${title}!`);
-    } else {
-      alert('Error playing game. Please try again later.');
-    }
+  const handlePlayGame = (event) => {
+    event.preventDefault();
+    alert(`You are playing ${title}!`);
   };
+  
+  
+  
   
   const handleClickOutside = (event) => {
     if (ref.current && !ref.current.contains(event.target)) {
