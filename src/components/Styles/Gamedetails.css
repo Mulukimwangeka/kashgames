@@ -55,6 +55,16 @@
   margin-bottom: 1rem;
   color: #0e0e0e;
 }
+.game-details__phone-button{
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 1rem;
+}
 
 .game-details__phone-form {
   margin-top: 1rem;
