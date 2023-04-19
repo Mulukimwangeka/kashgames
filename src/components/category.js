@@ -38,7 +38,7 @@ function Category(props) {
           key={game.id}
           id={game.id}
           title={game.title}
-          
+          description={game.description}
           images={game.image}
           productId={game.productId} // add productId here
 

@@ -18,7 +18,6 @@ function GameCard({id ,title, images, description, subscriberId, productId }) {
       <img src={images} alt={title} className="game-card__image" />
       <div className="game-card__content">
         <h3 className="game-card__title">{title}</h3>
-        <p className="game-card__description">{description}</p>
         <button className="game-card__button" onClick={handlePlayNow}>
           Play
         </button>
