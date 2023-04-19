@@ -1,14 +1,18 @@
 .game-card {
   display: flex;
   flex-direction: column;
-  margin: 10px;
+  margin: 50px;
   background-color: #f8f8f8;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-  max-width: 300px; 
+  max-width: 250px; 
+  height: 7cm;
+  align-items: center;
+  border-radius: 10px;
 }
 
 .game-card__image {
-  width: 100%;
+  margin-top: 0.5cm;
+  width: 80%;
   height: auto;
   object-fit: cover;
 }
