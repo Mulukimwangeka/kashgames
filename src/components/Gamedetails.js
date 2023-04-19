@@ -111,8 +111,16 @@ function GameDetails({ title, description, images, onClose, productId }) {
                     <form onSubmit={handleSubmit}>
                       <label className="game-label">
                         Enter your phone number to play the game:
-                        <input type="tel" value={phoneNumber} onChange={handlePhoneNumberChange}
-                          className="game-details__phone-input" required />
+                        <input 
+                         type="tel" 
+                         value={phoneNumber} 
+                         onChange={handlePhoneNumberChange}
+                         className="game-details__phone-input" 
+                         required 
+                        pattern="^(?:254|\+254|0)?((?:1[01][0-9]|7[7-9])[0-9]{6}|[1-9][0-9]{8})$"
+                      />
+
+
                       </label>
                       <button type="submit" className="game-details__phone-button">Submit</button>
                     </form>
