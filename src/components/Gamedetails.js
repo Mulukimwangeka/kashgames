@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import './Styles/Gamedetails.css';
 import { baseUrl } from './util/commonutil';
 
-function GameDetails({ title, description, images, onClose, productId }) {
+function GameDetails({ title, description, images, onClose, productId ,subscriberId}) {
   const [phoneNumber, setPhoneNumber] = useState('');
   const [showPhoneForm, setShowPhoneForm] = useState(false);
   const [subscribed, setSubscribed] = useState(false);
@@ -21,6 +21,14 @@ function GameDetails({ title, description, images, onClose, productId }) {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    if (!subscribed) {
+      const subscribe = window.confirm(
+        `You are about to subscribe to ${title}. Do you want to continue?`
+      );
+      if (!subscribe) {
+        return;
+      }
+    }
     const apiEndpoint = '/api/v1/subs/check';
     const fullEndpoint = `${baseUrl}${apiEndpoint}`;
     const config = {
@@ -31,7 +39,7 @@ function GameDetails({ title, description, images, onClose, productId }) {
       },
       body: JSON.stringify({
         productId: productId,
-        phoneNumber: `254${phoneNumber.slice(1)}`,
+        SubscriberId: `254${phoneNumber.slice(1)}`,
       }),
     };
     const response = await fetch(fullEndpoint, config).catch((error) => {
@@ -47,6 +55,7 @@ function GameDetails({ title, description, images, onClose, productId }) {
       alert('Error charging your account. Please try again later.');
     }
   };
+  
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
