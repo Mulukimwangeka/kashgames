@@ -4,7 +4,12 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
   }
+  
   
   .footer__text {
     font-size: 14px;

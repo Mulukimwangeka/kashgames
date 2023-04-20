@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './Styles/Gamecard.css';
 import GameDetails from './Gamedetails';
 
-function GameCard({id ,title, images, description, subscriberId, productId }) {
+function GameCard({title, images, description, subscriberId, productId }) {
   const [showModal, setShowModal] = useState(false);
 
   const handlePlayNow = () => {
