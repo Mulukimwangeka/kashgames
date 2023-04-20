@@ -12,8 +12,8 @@
 
 .game-card__image {
   margin-top: 0.5cm;
-  width: 80%;
-  height: auto;
+  width: 5cm;
+  height: 5cm;
   object-fit: cover;
 }
 
