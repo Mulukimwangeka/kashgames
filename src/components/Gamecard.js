@@ -2,12 +2,11 @@ import React, { useState } from 'react';
 import './Styles/Gamecard.css';
 import GameDetails from './Gamedetails';
 
-function GameCard({title, images, description, subscriberId, productId, link }) {
+function GameCard({title, images, description, subscriberId, productId }) {
   const [showModal, setShowModal] = useState(false);
 
   const handlePlayNow = () => {
-    console.log(link);
-    window.open(link, '_blank'); //game link in a new tab
+    setShowModal(true);
   };
 
   const handleClose = (event) => {
@@ -27,7 +26,7 @@ function GameCard({title, images, description, subscriberId, productId, link }) 
             <GameDetails
               title={title}
               description={description}
-              image={images}
+              images={images}
               onClose={(event) => handleClose(event)}
               subscriberId={subscriberId}
               productId={productId} 
@@ -40,5 +39,3 @@ function GameCard({title, images, description, subscriberId, productId, link }) 
 }
 
 export default GameCard;
-
-
