@@ -10,7 +10,8 @@ function GameCard({title, images, description, subscriberId, productId,link }) {
     if (loggedIn) {
       window.open(link, '_blank');
     } else {
-      // show the GameDetails modal
+      // inform the user that they need to be subscribed before showing the modal
+      alert('You need to be subscribed to play this game.');
       setShowModal(true);
     }
   };
