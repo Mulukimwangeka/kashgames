@@ -2,12 +2,20 @@ import React, { useState } from 'react';
 import './Styles/Gamecard.css';
 import GameDetails from './Gamedetails';
 
-function GameCard({title, images, description, subscriberId, productId }) {
+function GameCard({title, images, description, subscriberId, productId,link }) {
   const [showModal, setShowModal] = useState(false);
 
   const handlePlayNow = () => {
-    setShowModal(true);
+    const loggedIn = !!sessionStorage.getItem('subscriberId');
+    if (loggedIn) {
+      window.open(link, '_blank');
+    } else {
+      // show the GameDetails modal
+      setShowModal(true);
+    }
   };
+  
+  
 
   const handleClose = (event) => {
     setShowModal(false);
