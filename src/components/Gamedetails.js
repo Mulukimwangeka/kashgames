@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import './Styles/Gamedetails.css';
 import { baseUrl } from './util/commonutil';
 
-function GameDetails({ title, description, images, onClose, productId ,subscriberId}) {
+function GameDetails({ title, description, images, onClose, productId ,subscriberId,link}) {
   const [phoneNumber, setPhoneNumber] = useState('');
   const [showPhoneForm, setShowPhoneForm] = useState(false);
   const [subscribed, setSubscribed] = useState(false);
@@ -21,42 +21,35 @@ function GameDetails({ title, description, images, onClose, productId ,subscribe
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    if (!subscribed) {
-      const apiEndpoint = '/api/v1/subs/check';
-      const fullEndpoint = `${baseUrl}${apiEndpoint}`;
-      const config = {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'ngrok-skip-browser-warning': '69420',
-        },
-        body: JSON.stringify({
-          productId: productId,
-          subscriberId: `254${phoneNumber.slice(1)}`,
-        }),
-      };
-      const response = await fetch(fullEndpoint, config).catch((error) => {
-        alert('Error charging your account. Please try again later.');
-        console.error(error);
-      });
-      if (response.ok) {
-        const data = await response.json();
-        setSubscribed(true);
-        setShowPhoneForm(false);
-        alert(`You have successfully subscribed to ${title}!`);
-      } else {
-        const subscribe = window.confirm(
-          `You need to subscribe to ${title} to play this game. Would you like to subscribe now?`
-        );
-        if (subscribe) {
-          // Call the handleSubmit function again to try subscribing again
-          handleSubmit(event);
-        }
-      }
+    const apiEndpoint = '/api/v1/subs/check';
+    const fullEndpoint = `${baseUrl}${apiEndpoint}`;
+    const config = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'ngrok-skip-browser-warning': '69420',
+      },
+      body: JSON.stringify({
+        productId: productId,
+        subscriberId: `254${phoneNumber.slice(1)}`,
+      }),
+    };
+    const response = await fetch(fullEndpoint, config).catch((error) => {
+      alert('Error charging your account. Please try again later.');
+      console.error(error);
+    });
+    if (response.ok) {
+      const data = await response.json();
+      setSubscribed(true);
+      setShowPhoneForm(false);
+      alert(`You have successfully purchased ${title}!`);
+      // Redirect the user to the game page
+      window.location.href = link;
     } else {
-      alert(`You are already subscribed to ${title}.`);
+      alert('Payment failed. Please try again later.');
     }
   };
+  
   
   
 
