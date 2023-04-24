@@ -48,7 +48,7 @@ function Category(props) {
           ) : (
             <div class="loading">
               <p>Loading games...</p>
-            </div>
+          </div>
           )}
         </div>
       </div>

@@ -37,3 +37,33 @@
   }
 }
 
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+#root {
+  min-height: 100%;
+  position: relative;
+}
+
+.content {
+  padding-bottom: 30px; /* Set the height of the footer */
+}
+
+.footer {
+  background-color: #f2f2f2;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+
+.footer__text {
+  font-size: 14px;
+  color: #333;
+}

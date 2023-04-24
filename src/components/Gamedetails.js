@@ -34,11 +34,15 @@ function GameDetails({ title, description, images, onClose, productId ,link}) {
         subscriberId: `254${phoneNumber.slice(1)}`,
       }),
     };
-    const response = await fetch(fullEndpoint, config).catch((error) => {
+    let response;
+    try {
+      response = await fetch(fullEndpoint, config);
+    } catch (error) {
       alert('Error charging your account. Please try again later.');
       console.error(error);
-    });
-    if (response.ok) {
+      return;
+    }
+    if (response && response.ok) {
       const data = await response.json();
       setSubscribed(true);
       setShowPhoneForm(false);
@@ -49,6 +53,7 @@ function GameDetails({ title, description, images, onClose, productId ,link}) {
       alert('Payment failed. Please try again later.');
     }
   };
+  
   
   
   
