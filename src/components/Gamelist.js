@@ -37,6 +37,7 @@ function GamesList() {
             description={game.description}
             productId={game.productId}
             link={game.link}
+            subscriberId={game.subscriberId}
 
             className="game-card"
           />

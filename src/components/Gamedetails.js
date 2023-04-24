@@ -1,8 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react';
 import './Styles/Gamedetails.css';
-import { baseUrl } from './util/commonutil';
+// import { baseUrl } from './util/commonutil';
 
-function GameDetails({ title, description, images, onClose, productId ,link}) {
+function GameDetails({ title, description, images, onClose, link }) {
   const [phoneNumber, setPhoneNumber] = useState('');
   const [showPhoneForm, setShowPhoneForm] = useState(false);
   const [subscribed, setSubscribed] = useState(false);
@@ -11,70 +11,99 @@ function GameDetails({ title, description, images, onClose, productId ,link}) {
   const ref = useRef(null);
 
   const handlePhoneNumberChange = (event) => {
-    setPhoneNumber(event.target.value);
+    const inputNumber = event.target.value.trim();
+    const formattedNumber = inputNumber.replace(/^(0|\+254)/, '2547');
+    setPhoneNumber(formattedNumber);
   };
+
 
   const handlePayAndPlay = (event) => {
     event.preventDefault();
     setShowPhoneForm(true);
   };
-
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const apiEndpoint = '/api/v1/dailysubs/getSubs/{subscriberId}';
-    const fullEndpoint = `${baseUrl}${apiEndpoint}`;
-    const config = {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'ngrok-skip-browser-warning': '69420',
-      },
-      body: JSON.stringify({
-        productId: productId,
-        subscriberId: `254${phoneNumber.slice(1)}`,
-      }),
+  
+    const chargeEndpoint = 'http://api.africomltd.com/api/request/charge';
+    const chargeRequestData = {
+      subscriberId: phoneNumber,
+      productId: "fb3298b9-34c5-4b3d-a2f7-469e71fa9941",
+      amount: 5.0
     };
-    let response;
+    const chargeConfig = {
+      method: 'POST',
+      body: JSON.stringify(chargeRequestData),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    };
+    
+  
+    let chargeResponse;
     try {
-      response = await fetch(fullEndpoint, config);
+      chargeResponse = await fetch(chargeEndpoint, chargeConfig);
     } catch (error) {
-      alert('Error charging your account. Please try again later.');
+      alert('Error charging. Please try again later.');
       console.error(error);
       return;
     }
-    if (response && response.ok) {
-      const data = await response.json();
-      setSubscribed(true);
-      setShowPhoneForm(false);
-      alert(`You have successfully purchased ${title}!`);
-      // Redirect the user to the game page
-      window.location.href = link;
+  
+    if (chargeResponse && chargeResponse.ok) {
+      const subscribeEndpoint = 'http://163.172.170.26:9097/api/request/subscribe';
+      const subscribeRequestData = {
+        msisdn: phoneNumber,
+        productId: "fb3298b9-34c5-4b3d-a2f7-469e71fa9941"
+      };
+      const subscribeConfig = {
+        method: 'POST',
+        body: JSON.stringify(subscribeRequestData),
+      };
+  
+      let subscribeResponse;
+      try {
+        subscribeResponse = await fetch(subscribeEndpoint, subscribeConfig);
+      } catch (error) {
+        alert('Error subscribing. Please try again later.');
+        console.error(error);
+        return;
+      }
+  
+      if (subscribeResponse && subscribeResponse.ok) {
+        setSubscribed(true);
+        setShowPhoneForm(false);
+        alert(`You have successfully subscribed to the charging service!`);
+        window.location.href = link;
+      } else {
+        alert('Subscription failed. Please try again later.');
+      }
     } else {
-      alert('Payment failed. Please try again later.');
+      alert('Charging failed. Please try again later.');
     }
   };
   
   
-  
-  
+
+
+
+
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
   };
 
 
- 
-  
-  
-  
-  
+
+
+
+
+
   const handleClickOutside = (event) => {
     if (ref.current && !ref.current.contains(event.target)) {
       setShowPhoneForm(false);
       onClose();
     }
   };
-  
+
   useEffect(() => {
     document.addEventListener('mousedown', handleClickOutside);
     return () => {
@@ -82,8 +111,8 @@ function GameDetails({ title, description, images, onClose, productId ,link}) {
     };
   }, []);
 
-  
-  
+
+
   return (
     <>
       {isModalOpen && (
@@ -100,14 +129,14 @@ function GameDetails({ title, description, images, onClose, productId ,link}) {
                     <form onSubmit={handleSubmit}>
                       <label className="game-label">
                         Enter your phone number to play the game:
-                        <input 
-                         type="tel" 
-                         value={phoneNumber} 
-                         onChange={handlePhoneNumberChange}
-                         className="game-details__phone-input" 
-                         required 
-                        pattern="^(?:254|\+254|0)?((?:1[01][0-9]|7[7-9])[0-9]{6}|[1-9][0-9]{8})$"
-                      />
+                        <input
+                          type="tel"
+                          value={phoneNumber}
+                          onChange={handlePhoneNumberChange}
+                          className="game-details__phone-input"
+                          required
+                          pattern="^(?:254|\+254|0)?((?:1[01][0-9]|7[7-9])[0-9]{6}|[1-9][0-9]{8})$"
+                        />
 
 
                       </label>
@@ -118,8 +147,8 @@ function GameDetails({ title, description, images, onClose, productId ,link}) {
                   )}
                 </div>
               )}
-              
-             
+
+
             </div>
           </div>
         </div>
