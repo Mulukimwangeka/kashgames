@@ -46,7 +46,9 @@ function Category(props) {
 
             ))
           ) : (
-            <p>No games found in this category</p>
+            <div class="loading">
+              <p>Loading games...</p>
+            </div>
           )}
         </div>
       </div>
