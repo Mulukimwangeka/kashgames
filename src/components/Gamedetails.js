@@ -21,7 +21,7 @@ function GameDetails({ title, description, images, onClose, productId ,subscribe
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const apiEndpoint = '/api/v1/subs/check';
+    const apiEndpoint = '/api/v1/dailysubs/getSubs/{subscriberId}';
     const fullEndpoint = `${baseUrl}${apiEndpoint}`;
     const config = {
       method: 'POST',
