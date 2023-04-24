@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import './Styles/Gamedetails.css';
 import { baseUrl } from './util/commonutil';
 
-function GameDetails({ title, description, images, onClose, productId ,subscriberId,link}) {
+function GameDetails({ title, description, images, onClose, productId ,link}) {
   const [phoneNumber, setPhoneNumber] = useState('');
   const [showPhoneForm, setShowPhoneForm] = useState(false);
   const [subscribed, setSubscribed] = useState(false);
@@ -58,10 +58,7 @@ function GameDetails({ title, description, images, onClose, productId ,subscribe
   };
 
 
-  const handlePlayGame = (event) => {
-    event.preventDefault();
-    alert(`You are playing ${title}!`);
-  };
+ 
   
   
   
@@ -116,9 +113,8 @@ function GameDetails({ title, description, images, onClose, productId ,subscribe
                   )}
                 </div>
               )}
-              {subscribed && (
-                <button onClick={handlePlayGame} className="game-details__phone-button">Play Game</button>
-              )}
+              
+             
             </div>
           </div>
         </div>
