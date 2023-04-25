@@ -55,6 +55,7 @@ function GameCard({title, images, description, subscriberId, productId,link }) {
               onClose={(event) => handleClose(event)}
               subscriberId={subscriberId}
               productId={productId} 
+              link={link}
             />
           </div>
         )}

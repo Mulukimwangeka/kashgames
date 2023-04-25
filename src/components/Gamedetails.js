@@ -1,5 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import './Styles/Gamedetails.css';
+import axios from 'axios';
+
 // import { baseUrl } from './util/commonutil';
 
 function GameDetails({ title, description, images, onClose, link }) {
@@ -24,78 +26,85 @@ function GameDetails({ title, description, images, onClose, link }) {
   const handleSubmit = async (event) => {
     event.preventDefault();
   
-    const chargeEndpoint = 'http://api.africomltd.com/api/request/charge';
-    const chargeRequestData = {
+    const chargeEndpoint = 'http://163.172.170.26:9158/api/wap/charge';
+    const chargeRequestData = JSON.stringify({
       subscriberId: phoneNumber,
       productId: "fb3298b9-34c5-4b3d-a2f7-469e71fa9941",
       amount: 5.0
-    };
+    });
     const chargeConfig = {
-      method: 'POST',
-      body: JSON.stringify(chargeRequestData),
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin':'*'
       }
     };
-    
   
-    let chargeResponse;
     try {
-      chargeResponse = await fetch(chargeEndpoint, chargeConfig);
-    } catch (error) {
-      alert('Error charging. Please try again later.');
-      console.error(error);
-      return;
-    }
+
+      var config = {
+        method: 'post',
+        url: 'http://163.172.170.26:9158/api/wap/charge',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        data: chargeRequestData
+    };
+
+    axios(config)
+    .then(res=>{
+console.log(res);
+    }).catch(err=>{
+      console.log(err)
+    })
+
+      const chargeResponse = await axios.post(chargeEndpoint, chargeRequestData, chargeConfig);
   
-    if (chargeResponse && chargeResponse.ok) {
+      if (chargeResponse.status !== 200) {
+        throw new Error(`Charging failed with status code ${chargeResponse.status}`);
+      }
+  
       const subscribeEndpoint = 'http://163.172.170.26:9097/api/request/subscribe';
       const subscribeRequestData = {
         msisdn: phoneNumber,
         productId: "fb3298b9-34c5-4b3d-a2f7-469e71fa9941"
       };
       const subscribeConfig = {
-        method: 'POST',
-        body: JSON.stringify(subscribeRequestData),
+        headers: {
+          'Content-Type': 'application/json'
+        }
       };
   
-      let subscribeResponse;
-      try {
-        subscribeResponse = await fetch(subscribeEndpoint, subscribeConfig);
-      } catch (error) {
-        alert('Error subscribing. Please try again later.');
-        console.error(error);
-        return;
+      const subscribeResponse = await axios.post(subscribeEndpoint, subscribeRequestData, subscribeConfig);
+  
+      if (subscribeResponse.status !== 200) {
+        throw new Error(`Subscription failed with status code ${subscribeResponse.status}`);
       }
   
-      if (subscribeResponse && subscribeResponse.ok) {
-        setSubscribed(true);
-        setShowPhoneForm(false);
-        alert(`You have successfully subscribed to the charging service!`);
-        window.location.href = link;
+      setSubscribed(true);
+      setShowPhoneForm(false);
+      console.log(link)
+
+      alert(`You have successfully subscribed to the charging service!`);
+      window.location.href = link;
+  
+    } catch (error) {
+      console.error(error);
+  
+      if (error.response) {
+        alert(`Error: ${error.response.data}`);
+      } else if (error.request) {
+        alert('Error: Network error. Please check your internet connection and try again later.');
       } else {
-        alert('Subscription failed. Please try again later.');
+        alert('Error: Something went wrong. Please try again later.');
       }
-    } else {
-      alert('Charging failed. Please try again later.');
     }
   };
   
-  
-
-
-
 
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
   };
-
-
-
-
-
-
 
   const handleClickOutside = (event) => {
     if (ref.current && !ref.current.contains(event.target)) {

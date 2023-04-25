@@ -35,6 +35,12 @@ function Header() {
     // handle category click without history
   };
 
+  // const handleClearStorage = () => {
+  //   sessionStorage.clear();
+  //   alert('Session storage cleared.');
+  // };
+  
+
   return (
     <>
       <header className="header">
@@ -42,6 +48,7 @@ function Header() {
           <div className="header__brand">
             <h1 className="header__brand-name">KashGames</h1>
           </div>
+         
         
         </div>
         
@@ -53,6 +60,7 @@ function Header() {
         >
           {showMobileMenu ? 'Exit' : 'Categories of Games ☰ '}
         </button>
+        
       </div>
 
       <nav className="header__nav">
@@ -74,6 +82,7 @@ function Header() {
               </li>
             ))}
           </ul>
+          
         </div>
       </nav>
 
