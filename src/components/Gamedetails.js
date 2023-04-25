@@ -1,8 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import './Styles/Gamedetails.css';
 import axios from 'axios';
-
-// import { baseUrl } from './util/commonutil';
+import { baseUrl } from './util/commonutil';
 
 function GameDetails({ title, description, images, onClose, link }) {
   const [phoneNumber, setPhoneNumber] = useState('');
@@ -23,40 +22,28 @@ function GameDetails({ title, description, images, onClose, link }) {
     event.preventDefault();
     setShowPhoneForm(true);
   };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
+   
   
-    const chargeEndpoint = 'http://163.172.170.26:9158/api/wap/charge';
+    const chargeEndpoint = `${baseUrl}/api/v1/charge/initiate`;
+  
     const chargeRequestData = JSON.stringify({
       subscriberId: phoneNumber,
       productId: "fb3298b9-34c5-4b3d-a2f7-469e71fa9941",
       amount: 5.0
     });
+  
     const chargeConfig = {
       headers: {
         'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin':'*'
+        'ngrok-skip-browser-warning': '69420',
+
       }
     };
   
     try {
-
-      var config = {
-        method: 'post',
-        url: 'http://163.172.170.26:9158/api/wap/charge',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        data: chargeRequestData
-    };
-
-    axios(config)
-    .then(res=>{
-console.log(res);
-    }).catch(err=>{
-      console.log(err)
-    })
-
       const chargeResponse = await axios.post(chargeEndpoint, chargeRequestData, chargeConfig);
   
       if (chargeResponse.status !== 200) {
@@ -82,8 +69,9 @@ console.log(res);
   
       setSubscribed(true);
       setShowPhoneForm(false);
-      console.log(link)
-
+  
+      sessionStorage.setItem('phoneNumber', phoneNumber);
+  
       alert(`You have successfully subscribed to the charging service!`);
       window.location.href = link;
   
@@ -100,6 +88,7 @@ console.log(res);
     }
   };
   
+
 
 
   const handleCloseModal = () => {
