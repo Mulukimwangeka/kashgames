@@ -15,7 +15,7 @@ function GameDetails({ title, description, images, onClose, link }) {
 
   const handlePhoneNumberChange = (event) => {
     const inputNumber = event.target.value.trim();
-    const formattedNumber = inputNumber.replace(/^(0|\+254)/, '2547');
+    const formattedNumber = inputNumber.replace(/^(0|\+254)/, '254');
     setPhoneNumber(formattedNumber);
   };
 
@@ -25,6 +25,7 @@ function GameDetails({ title, description, images, onClose, link }) {
     setShowPhoneForm(true);
   };
 
+  
   const handleSubmit = async (event) => {
     event.preventDefault();
   
@@ -58,7 +59,6 @@ function GameDetails({ title, description, images, onClose, link }) {
         headers: {
           'Content-Type': 'application/json',
           'ngrok-skip-browser-warning': '69420',
-      
         }
       };
     
@@ -87,7 +87,6 @@ function GameDetails({ title, description, images, onClose, link }) {
         alert('Error: Network error. Please check your internet connection and try again later.');
       } 
     }
-    
   };
   
  

@@ -86,7 +86,6 @@
 .game-label input {
   width: 100%;
   padding: 0.1rem;
-  border: 1px solid #ddd;
   border-radius: 5px;
   font-size: 1.2rem;
 }
