@@ -8,6 +8,8 @@ function GameDetails({ title, description, images, onClose, link }) {
   const [showPhoneForm, setShowPhoneForm] = useState(false);
   const [subscribed, setSubscribed] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(true);
+  const [ setShowGames] = useState(true);
+
 
   const ref = useRef(null);
 
@@ -25,7 +27,6 @@ function GameDetails({ title, description, images, onClose, link }) {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-   
   
     const chargeEndpoint = `${baseUrl}/api/v1/charge/initiate`;
   
@@ -39,7 +40,7 @@ function GameDetails({ title, description, images, onClose, link }) {
       headers: {
         'Content-Type': 'application/json',
         'ngrok-skip-browser-warning': '69420',
-
+  
       }
     };
   
@@ -74,7 +75,8 @@ function GameDetails({ title, description, images, onClose, link }) {
   
       alert(`You have successfully subscribed to the charging service!`);
       window.open(link, '_blank');
-  
+      onClose();
+      setShowGames(true);
     } catch (error) {
       console.error(error);
   
@@ -82,14 +84,12 @@ function GameDetails({ title, description, images, onClose, link }) {
         alert(`Error: ${error.response.data}`);
       } else if (error.request) {
         alert('Error: Network error. Please check your internet connection and try again later.');
-      } else {
-        alert('Error: Something went wrong. Please try again later.');
-      }
+      } 
     }
   };
   
-
-
+ 
+  
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
@@ -108,6 +108,7 @@ function GameDetails({ title, description, images, onClose, link }) {
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, []);
+
 
 
 

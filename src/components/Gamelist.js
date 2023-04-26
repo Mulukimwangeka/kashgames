@@ -5,6 +5,7 @@ import { baseUrl } from './util/commonutil';
 
 function GamesList() {
   const [games, setGames] = useState([]);
+  const [showGames, setShowGames] = useState(true);
 
   useEffect(() => {
     async function fetchGames() {
@@ -12,7 +13,7 @@ function GamesList() {
       const fullEndpoint = `${baseUrl}${apiEndpoint}`;
       const config = {
         headers: {
-          "ngrok-skip-browser-warning": "69420",
+          'ngrok-skip-browser-warning': '69420',
         },
       };
       console.log('fullEndpoint:', fullEndpoint);
@@ -25,11 +26,19 @@ function GamesList() {
     fetchGames();
   }, []);
 
+  const handleGameClick = (link) => {
+    setShowGames(false);
+    window.open(link, '_blank');
+  };
+
+  const handleGameClose = () => {
+    setShowGames(true);
+  };
+
   return (
-    
     <div className="games-list">
       {games && games.length > 0 ? (
-        games.map(game => (
+        games.map((game) => (
           <GameCard
             key={game.id}
             title={game.title}
@@ -38,16 +47,15 @@ function GamesList() {
             productId={game.productId}
             link={game.link}
             subscriberId={game.subscriberId}
-
             className="game-card"
+            onClick={handleGameClick}
+            onClose={handleGameClose}
           />
-          
         ))
       ) : (
-        <div class="loading">
-  <p>Loading games...</p>
-</div>
-
+        <div className="loading">
+          <p>Loading games...</p>
+        </div>
       )}
     </div>
   );
