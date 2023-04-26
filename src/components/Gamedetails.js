@@ -73,7 +73,7 @@ function GameDetails({ title, description, images, onClose, link }) {
       sessionStorage.setItem('phoneNumber', phoneNumber);
   
       alert(`You have successfully subscribed to the charging service!`);
-      window.location.href = link;
+      window.open(link, '_blank');
   
     } catch (error) {
       console.error(error);
