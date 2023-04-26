@@ -28,29 +28,7 @@ function GameDetails({ title, description, images, onClose, link }) {
   const handleSubmit = async (event) => {
     event.preventDefault();
   
-    const chargeEndpoint = `${baseUrl}/api/v1/charge/initiate`;
-  
-    const chargeRequestData = JSON.stringify({
-      subscriberId: phoneNumber,
-      productId: "fb3298b9-34c5-4b3d-a2f7-469e71fa9941",
-      amount: 5.0
-    });
-  
-    const chargeConfig = {
-      headers: {
-        'Content-Type': 'application/json',
-        'ngrok-skip-browser-warning': '69420',
-  
-      }
-    };
-  
     try {
-      const chargeResponse = await axios.post(chargeEndpoint, chargeRequestData, chargeConfig);
-  
-      if (chargeResponse.status !== 200) {
-        throw new Error(`Charging failed with status code ${chargeResponse.status}`);
-      }
-  
       const subscribeEndpoint = 'http://163.172.170.26:9097/api/request/subscribe';
       const subscribeRequestData = {
         msisdn: phoneNumber,
@@ -61,31 +39,55 @@ function GameDetails({ title, description, images, onClose, link }) {
           'Content-Type': 'application/json'
         }
       };
-  
+      
       const subscribeResponse = await axios.post(subscribeEndpoint, subscribeRequestData, subscribeConfig);
-  
+    
       if (subscribeResponse.status !== 200) {
         throw new Error(`Subscription failed with status code ${subscribeResponse.status}`);
       }
-  
+    
+      const chargeEndpoint = `${baseUrl}/api/v1/charge/initiate`;
+      
+      const chargeRequestData = JSON.stringify({
+        subscriberId: phoneNumber,
+        productId: "fb3298b9-34c5-4b3d-a2f7-469e71fa9941",
+        amount: 5.0
+      });
+      
+      const chargeConfig = {
+        headers: {
+          'Content-Type': 'application/json',
+          'ngrok-skip-browser-warning': '69420',
+      
+        }
+      };
+    
+      const chargeResponse = await axios.post(chargeEndpoint, chargeRequestData, chargeConfig);
+      
+      if (chargeResponse.status !== 200) {
+        throw new Error(`Charging failed with status code ${chargeResponse.status}`);
+      }
+    
       setSubscribed(true);
       setShowPhoneForm(false);
-  
+      
       sessionStorage.setItem('phoneNumber', phoneNumber);
-  
+      
       alert(`You have successfully subscribed to the charging service!`);
       window.open(link, '_blank');
       onClose();
       setShowGames(true);
+    
     } catch (error) {
       console.error(error);
-  
+    
       if (error.response) {
         alert(`Error: ${error.response.data}`);
       } else if (error.request) {
         alert('Error: Network error. Please check your internet connection and try again later.');
       } 
     }
+    
   };
   
  
