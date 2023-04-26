@@ -8,7 +8,7 @@ function GameDetails({ title, description, images, onClose, link }) {
   const [showPhoneForm, setShowPhoneForm] = useState(false);
   const [subscribed, setSubscribed] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(true);
-  const [ setShowGames] = useState(true);
+  const [showGames,setShowGames] = useState(true);
 
 
   const ref = useRef(null);
