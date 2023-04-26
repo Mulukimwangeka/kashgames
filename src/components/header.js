@@ -67,14 +67,13 @@ function Header() {
         <div className="container">
           <ul className="header__nav-menu">
             <li className="header__nav-item">
-              <NavLink exact to="/" className="header__nav-link" activeClassName="active">All Games</NavLink>
+              <NavLink to="/" className="header__nav-link" >All Games</NavLink>
             </li>
             {categories.map((category) => (
               <li className="header__nav-item" key={category.id}>
                 <NavLink 
                   to={`/category/${category.id}`} 
                   className="header__nav-link" 
-                  activeClassName="active"
                   onClick={() => handleCategoryClick(category.id)}
                 >
                   {category.title}
@@ -91,10 +90,8 @@ function Header() {
           <ul className="header__mobile-nav-menu">
             <li className="header__mobile-nav-item">
               <NavLink
-                exact
                 to="/"
                 className="header__mobile-nav-link"
-                activeClassName="active"
                 onClick={toggleMobileMenu}
               >
                 All Games
@@ -105,7 +102,6 @@ function Header() {
                 <NavLink
                   to={`/category/${category.id}`}
                   className="header__mobile-nav-link"
-                  activeClassName="active"
                   onClick={() => handleCategoryClick(category.id)}
                 >
                   {category.title}

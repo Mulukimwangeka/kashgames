@@ -16,23 +16,6 @@ function GameCard({title, images, description, subscriberId, productId,link }) {
     }
   };
   
-  // set expiration time to 24 hours from now
-  const expirationTime = new Date().getTime() + (24 * 60 * 60 * 1000);
-  sessionStorage.setItem('expirationTime', expirationTime);
-  
-  // check if session storage has expired
-  const hasSessionExpired = () => {
-    const currentTime = new Date().getTime();
-    const expirationTime = sessionStorage.getItem('expirationTime');
-    return expirationTime && (currentTime >= expirationTime);
-  };
-  
-  // clear session storage if it has expired
-  if (hasSessionExpired()) {
-    sessionStorage.clear();
-  }
-  
-  
 
   const handleClose = (event) => {
     setShowModal(false);
