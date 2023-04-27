@@ -31,14 +31,14 @@ function Header() {
   };
 
   const handleCategoryClick = (categoryId) => {
-    setShowMobileMenu(false); // close mobile menu
-    // handle category click without history
+    setShowMobileMenu(false); 
   };
 
-  // const handleClearStorage = () => {
-  //   sessionStorage.clear();
-  //   alert('Session storage cleared.');
-  // };
+  const handleLogout = () => {
+    sessionStorage.removeItem('phoneNumber');
+    };
+
+ 
   
 
   return (
@@ -48,7 +48,10 @@ function Header() {
           <div className="header__brand">
             <h1 className="header__brand-name">KashGames</h1>
           </div>
-         
+          <button className="header__logout-button" onClick={handleLogout}>
+           Logout
+          </button>
+
         
         </div>
         
