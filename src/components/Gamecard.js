@@ -6,41 +6,32 @@ import { baseUrl } from './util/commonutil';
 
 function GameCard({ title, images, description, phoneNumber, productId, link }) {
   const [showModal, setShowModal] = useState(false);
-
   const handlePlayNow = async () => {
     const subscriberId = sessionStorage.getItem('phoneNumber');
-    console.log(subscriberId)
+    console.log(subscriberId);
     const loggedIn = !!subscriberId;
   
     if (loggedIn) {
-      // Check if the subscriber is fully subscribed
       try {
-        const response = await axios.get(`${baseUrl}/api/v1/dailysubs/getsubs/{subscriberId}`, {
+        const response = await axios.get(`${baseUrl}/api/v1/dailysubs/getsubs/${subscriberId}`, {
           headers: {
             'Content-Type': 'application/json',
             'ngrok-skip-browser-warning': '69420',
-
-          }
+          },
         });
-        
-
-        if (response.data.fullySubscribed) {
-          window.open(link, '_blank');
-        } else {
-          alert('You need to be fully subscribed to play this game.');
-          setShowModal(true);
-        }
+        console.log(response);
+        window.open(link, '_blank');
       } catch (error) {
         console.error(error);
-        alert('Failed to check subscription status. Please try again later.');
+        alert('Failed to fetch subscription details. Please try again later.');
         setShowModal(true);
-
       }
     } else {
       alert('You need to be subscribed to play this game.');
       setShowModal(true);
     }
   };
+  
   
 
   const handleClose = (event) => {
