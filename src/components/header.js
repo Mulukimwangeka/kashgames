@@ -50,6 +50,7 @@ function Header() {
       <header className="header">
       <button className="header__logout-button" onClick={handleLogout}>
         <FontAwesomeIcon icon={faSignOutAlt} />
+        <span>Logout</span>
     </button>
         <div className="container">
           <div className="header__brand">

@@ -69,6 +69,15 @@
   background-color: orange;
 }
 
+.header__logout-button span {
+  display: none;
+}
+
+.header__logout-button:hover span {
+  display: inline-block;
+  margin-left: 5px; /* Add some space between the icon and the text */
+}
+
 
 
 /* Mobile view */
