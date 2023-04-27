@@ -3,6 +3,9 @@ import { NavLink, useParams } from 'react-router-dom';
 import './Styles/header.css';
 import { baseUrl } from './util/commonutil';
 import Category from './category';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
+
 
 function Header() {
   const [categories, setCategories] = useState([]);
@@ -45,13 +48,14 @@ function Header() {
   return (
     <>
       <header className="header">
+      <button className="header__logout-button" onClick={handleLogout}>
+        <FontAwesomeIcon icon={faSignOutAlt} />
+    </button>
         <div className="container">
           <div className="header__brand">
             <h1 className="header__brand-name">KashGames</h1>
           </div>
-          <button className="header__logout-button" onClick={handleLogout}>
-           Logout
-          </button>
+          
 
         
         </div>

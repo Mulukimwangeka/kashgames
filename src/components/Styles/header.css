@@ -54,21 +54,22 @@
   display: none;
 }
 .header__logout-button {
-  background-color: #fff;
-  color: #000;
-  border: 2px solid #000;
-  border-radius: 4px;
-  font-size: 1rem;
-  font-weight: bold;
-  padding: 0.5rem 1rem;
-  margin-left: auto;
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 1;
+  padding: 10px;
+  background-color: #333;
+  color: #fff;
+  border: none;
+  font-size: 20px;
 }
 
 .header__logout-button:hover {
-  background-color: #000;
-  color: #fff;
-  cursor: pointer;
+  background-color: orange;
 }
+
+
 
 /* Mobile view */
 @media screen and (max-width: 767px) {
