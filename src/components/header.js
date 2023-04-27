@@ -36,8 +36,9 @@ function Header() {
 
   const handleLogout = () => {
     sessionStorage.removeItem('phoneNumber');
-    };
-
+    window.alert('You have been logged out. Please re-enter your phone number to log in again.');
+  };
+  
  
   
 
