@@ -17,6 +17,16 @@
 
   }
 
+  @media (min-width: 776px){
+    .game-card {
+      flex-basis: calc(33.33% - 20px); /* Set the width to 33.33% with 20px margin */
+      margin: 10px; /* Set margin for space between cards */
+      flex: 1 0 50%;
+    }
+
+    
+  }
+
 }
 
 .loading {

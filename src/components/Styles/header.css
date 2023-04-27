@@ -75,7 +75,7 @@
 @media screen and (max-width: 767px) {
 
   .header {
-    padding: 30px;
+    padding: 40px;
     position: relative;
     top: 0;
     z-index: 1;
