@@ -29,25 +29,26 @@ function GameDetails({ title, description, images, onClose, link }) {
   const handleSubmit = async (event) => {
     event.preventDefault();
   
-    const subscriberId = sessionStorage.getItem('phoneNumber');
-    const loggedIn = !!subscriberId;
-  
-    if (loggedIn) {
-      try {
-        const response = await axios.get(`${baseUrl}/api/v1/dailysubs/getsubs/${subscriberId}`, {
-          headers: {
-            'Content-Type': 'application/json',
-            'ngrok-skip-browser-warning': '69420',
-          },
-        });
-        console.log(response);
+    const subscriberId = phoneNumber;
+    try {
+      const response = await axios.get(`${baseUrl}/api/v1/dailysubs/getsubs/${subscriberId}`, {
+        headers: {
+          'Content-Type': 'application/json',
+          'ngrok-skip-browser-warning': '69420',
+        },
+      });
+      if (response.status === 200) {
+        sessionStorage.setItem('phoneNumber', phoneNumber);
         window.open(link, '_blank');
         onClose();
-      } catch (error) {
-        console.error(error);
-        alert('Failed to fetch subscription details. Please try again later.');
+        setShowGames(true);
+        setSubscribed(true);
+        setShowPhoneForm(false);
+        return;
       }
-      // return;
+    } catch (error) {
+      console.error(error);
+      alert('Failed to fetch subscription details. Please try again later.');
     }
   
     try {
@@ -65,10 +66,26 @@ function GameDetails({ title, description, images, onClose, link }) {
       const subscribeResponse = await axios.post(subscribeEndpoint, subscribeRequestData, subscribeConfig);
       console.log(subscribeResponse)
   
-      if (subscribeResponse.status !== 200) {
+      if (subscribeResponse.status === 823) {
+        window.open('');
+        return;
+      } else if (subscribeResponse.status === 9) {
+        sessionStorage.setItem('phoneNumber', phoneNumber);
+        window.open(link, '_blank');
+        onClose();
+        setShowGames(true);
+        setSubscribed(true);
+        setShowPhoneForm(false);
+        return;
+      } else if (subscribeResponse.status !== 200) {
         throw new Error(`Subscription failed with status code ${subscribeResponse.status}`);
       }
+    } catch (error) {
+      console.error(error);
+      alert('Subscription failed. Please try again later.');
+    }
   
+    if (subscribed.status === 9) {
       const chargeEndpoint = `${baseUrl}/api/v1/charge/initiate`;
   
       const chargeRequestData = JSON.stringify({
@@ -99,17 +116,9 @@ function GameDetails({ title, description, images, onClose, link }) {
       window.open(link, '_blank');
       onClose();
       setShowGames(true);
-  
-    } catch (error) {
-      console.error(error);
-  
-      if (error.response) {
-        alert(`Error: ${error.response.data}`);
-      } else if (error.request) {
-        alert('Error: Network error. Please check your internet connection and try again later.');
-      }
     }
   };
+  
   
   
  
