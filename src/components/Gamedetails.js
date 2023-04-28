@@ -47,7 +47,7 @@ function GameDetails({ title, description, images, onClose, link }) {
         console.error(error);
         alert('Failed to fetch subscription details. Please try again later.');
       }
-      return;
+      // return;
     }
   
     try {
@@ -63,6 +63,7 @@ function GameDetails({ title, description, images, onClose, link }) {
       };
   
       const subscribeResponse = await axios.post(subscribeEndpoint, subscribeRequestData, subscribeConfig);
+      console.log(subscribeResponse)
   
       if (subscribeResponse.status !== 200) {
         throw new Error(`Subscription failed with status code ${subscribeResponse.status}`);
