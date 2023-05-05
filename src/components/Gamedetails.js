@@ -48,14 +48,13 @@ function GameDetails({ title, description, images, onClose, link }) {
       }
     } catch (error) {
       console.error(error);
-      alert('Failed to fetch subscription details. Please try again later.');
     }
   
     try {
       const subscribeEndpoint = 'http://163.172.170.26:9097/api/request/subscribe';
       const subscribeRequestData = {
         msisdn: phoneNumber,
-        productId: "fb3298b9-34c5-4b3d-a2f7-469e71fa9941"
+        productId: "280c0a91-fbca-429f-b8e9-b308bc0ee4e9"
       };
       const subscribeConfig = {
         headers: {
@@ -64,10 +63,11 @@ function GameDetails({ title, description, images, onClose, link }) {
       };
   
       const subscribeResponse = await axios.post(subscribeEndpoint, subscribeRequestData, subscribeConfig);
-      console.log(subscribeResponse)
   
-      if (subscribeResponse.status === 823) {
-        window.open('');
+      if (subscribeResponse.status === 293) {
+        window.location.href = subscribeResponse.redirectUrl;
+        window.open(link, '_blank');
+        onClose();
         return;
       } else if (subscribeResponse.status === 9) {
         sessionStorage.setItem('phoneNumber', phoneNumber);
@@ -80,6 +80,7 @@ function GameDetails({ title, description, images, onClose, link }) {
       } else if (subscribeResponse.status !== 200) {
         throw new Error(`Subscription failed with status code ${subscribeResponse.status}`);
       }
+      
     } catch (error) {
       console.error(error);
       alert('Subscription failed. Please try again later.');
@@ -90,7 +91,7 @@ function GameDetails({ title, description, images, onClose, link }) {
   
       const chargeRequestData = JSON.stringify({
         subscriberId: phoneNumber,
-        productId: "fb3298b9-34c5-4b3d-a2f7-469e71fa9941",
+        productId: "280c0a91-fbca-429f-b8e9-b308bc0ee4e9",
         amount: 5.0
       });
   
