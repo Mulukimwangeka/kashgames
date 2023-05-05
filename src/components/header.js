@@ -58,6 +58,8 @@ function Header() {
           'ngrok-skip-browser-warning': '69420',
         },
       });
+      
+
       const isSubscribed = response.data;
       if (isSubscribed) {
         setIsLoggedIn(true);
@@ -170,7 +172,8 @@ function Header() {
         onChange={(event) => setPhoneNumber(event.target.value)}
       />
       <button onClick={handleLogin}>Log In</button>
-      <button className="popup__close" onClick={() => setShowLoginPopup(false)}>Close</button>
+      <button className="popup__close" onClick={() => setLogoutClicked(false)}>Close</button>
+
     </div>
   </div>
 )}
