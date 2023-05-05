@@ -68,6 +68,9 @@ function GameDetails({ title, description, images, onClose, link }) {
         window.location.href = subscribeResponse.redirectUrl;
         window.open(link, '_blank');
         onClose();
+        setShowGames(true);
+        setSubscribed(true);
+        setShowPhoneForm(false);
         return;
       } else if (subscribeResponse.status === 9) {
         sessionStorage.setItem('phoneNumber', phoneNumber);

@@ -47,6 +47,7 @@ function Header() {
   const handleCategoryClick = (categoryId) => {
     setShowMobileMenu(false); 
   };
+  
 
   const handleLogin = async () => {
     if (!phoneNumber.match(/^((\+254)|(0))[1-9]\d{8}$/)) {
