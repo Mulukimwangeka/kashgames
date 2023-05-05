@@ -49,6 +49,11 @@ function Header() {
   };
 
   const handleLogin = async () => {
+    if (!phoneNumber.match(/^((\+254)|(0))[1-9]\d{8}$/)) {
+      setErrorMessage("Please enter a valid Kenyan phone number");
+      return;
+    }
+    
     // Check if the phone number is subscribed
     const subscriberId = phoneNumber;
     try {
