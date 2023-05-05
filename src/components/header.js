@@ -163,7 +163,7 @@ function Header() {
       {logoutClicked && (
         <div className="overlay">
     <div className="popup">
-      <h3>Please enter your phone number to log in again</h3>
+      <h3>Please enter your phone number to Log In</h3>
       {errorMessage && <p className="popup__error">{errorMessage}</p>}
       <input
         type="text"
