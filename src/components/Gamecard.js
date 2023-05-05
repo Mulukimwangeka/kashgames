@@ -27,7 +27,6 @@ function GameCard({ title, images, description, phoneNumber, productId, link }) 
         setShowModal(true);
       }
     } else {
-      alert('You need to be subscribed to play this game.');
       setShowModal(true);
     }
   };
