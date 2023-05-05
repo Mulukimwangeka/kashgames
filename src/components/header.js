@@ -5,12 +5,22 @@ import { baseUrl } from './util/commonutil';
 import Category from './category';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
+import axios from 'axios';
+
+
 
 
 function Header() {
   const [categories, setCategories] = useState([]);
   const { categoryId } = useParams();
   const [showMobileMenu, setShowMobileMenu] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [showLoginPopup, setShowLoginPopup] = useState(false);
+  const [phoneNumber, setPhoneNumber] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+  const [logoutClicked, setLogoutClicked] = useState(false);
+
+
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -37,10 +47,37 @@ function Header() {
     setShowMobileMenu(false); 
   };
 
+  const handleLogin = async () => {
+    // Check if the phone number is subscribed
+    const subscriberId = phoneNumber;
+    try {
+      const response = await axios.get(`${baseUrl}/api/v1/dailysubs/getsubs/${subscriberId}`, {
+        headers: {
+          'Content-Type': 'application/json',
+          'ngrok-skip-browser-warning': '69420',
+        },
+      });
+      const isSubscribed = response.data; // Assuming the API returns a boolean value indicating the subscription status
+      if (isSubscribed) {
+        setIsLoggedIn(true);
+        setShowLoginPopup(false);
+        sessionStorage.setItem('phoneNumber', phoneNumber); // Store the phone number in session storage
+      } else {
+        setErrorMessage('Phone number is not subscribed');
+      }
+    } catch (error) {
+      console.error(error);
+      setErrorMessage('An error occurred while checking the subscription status');
+    }
+  };
+  
   const handleLogout = () => {
     sessionStorage.removeItem('phoneNumber');
-    window.alert('You have been logged out. Please re-enter your phone number to log in again.');
+    setLogoutClicked(true);
+    setShowLoginPopup(false); // Close the login popup
   };
+  
+  
   
  
   
@@ -56,9 +93,6 @@ function Header() {
           <div className="header__brand">
             <h1 className="header__brand-name">KashGames</h1>
           </div>
-          
-
-        
         </div>
         
       </header>
@@ -89,6 +123,7 @@ function Header() {
                 </NavLink>
               </li>
             ))}
+           
           </ul>
           
         </div>
@@ -122,6 +157,22 @@ function Header() {
       )}
 
       {categoryId ? <Category categoryId={categoryId} /> : null}
+      {logoutClicked && (
+  <div className="popup">
+    <h3>Please enter your phone number to log in again</h3>
+    {errorMessage && <p className="popup__error">{errorMessage}</p>}
+    <input
+      type="text"
+      placeholder="Phone number"
+      value={phoneNumber}
+      onChange={(event) => setPhoneNumber(event.target.value)}
+    />
+    <button onClick={handleLogin}>Log In</button>
+    <button className="popup__close" onClick={() => setShowLoginPopup(false)}>Close</button>
+  </div>
+)}
+
+
     </>
   );
 }

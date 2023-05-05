@@ -78,6 +78,63 @@
   margin-left: 5px; /* Add some space between the icon and the text */
 }
 
+.popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  border: 1px solid #ccc;
+  padding: 20px;
+  width: 400px;
+  text-align: center;
+}
+
+.popup h3 {
+  font-size: 1.2rem;
+  margin-top: 0;
+}
+
+.popup__error {
+  color: red;
+  font-size: 0.8rem;
+  margin-top: 10px;
+}
+
+.popup input[type="text"] {
+  display: block;
+  margin: 10px auto;
+  padding: 10px;
+  border: 1px solid #ccc;
+  width: 80%;
+  font-size: 1rem;
+}
+
+.popup button {
+  display: inline-block;
+  margin: 10px;
+  padding: 10px 20px;
+  background-color: #0077cc;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.popup button.popup__close {
+  background-color: #ccc;
+}
+
+.popup button:hover {
+  background-color: #005ea8;
+}
+
+.popup button.popup__close:hover {
+  background-color: #999;
+}
+
+
 
 
 /* Mobile view */
