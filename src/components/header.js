@@ -10,6 +10,7 @@ import axios from 'axios';
 
 
 
+
 function Header() {
   const [categories, setCategories] = useState([]);
   const { categoryId } = useParams();
@@ -57,7 +58,7 @@ function Header() {
           'ngrok-skip-browser-warning': '69420',
         },
       });
-      const isSubscribed = response.data; // Assuming the API returns a boolean value indicating the subscription status
+      const isSubscribed = response.data;
       if (isSubscribed) {
         setIsLoggedIn(true);
         setShowLoginPopup(false);
@@ -158,17 +159,19 @@ function Header() {
 
       {categoryId ? <Category categoryId={categoryId} /> : null}
       {logoutClicked && (
-  <div className="popup">
-    <h3>Please enter your phone number to log in again</h3>
-    {errorMessage && <p className="popup__error">{errorMessage}</p>}
-    <input
-      type="text"
-      placeholder="Phone number"
-      value={phoneNumber}
-      onChange={(event) => setPhoneNumber(event.target.value)}
-    />
-    <button onClick={handleLogin}>Log In</button>
-    <button className="popup__close" onClick={() => setShowLoginPopup(false)}>Close</button>
+        <div className="overlay">
+    <div className="popup">
+      <h3>Please enter your phone number to log in again</h3>
+      {errorMessage && <p className="popup__error">{errorMessage}</p>}
+      <input
+        type="text"
+        placeholder="Phone number"
+        value={phoneNumber}
+        onChange={(event) => setPhoneNumber(event.target.value)}
+      />
+      <button onClick={handleLogin}>Log In</button>
+      <button className="popup__close" onClick={() => setShowLoginPopup(false)}>Close</button>
+    </div>
   </div>
 )}
 
