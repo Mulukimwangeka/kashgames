@@ -231,6 +231,27 @@
     background-color: #fff;
     color: #333;
   }
+
+  .popup {
+    padding: 20px;
+    width: 80%;
+    }
+    
+    .popup h3 {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    }
+    
+    .popup input[type="text"] {
+    font-size: 1rem;
+    padding: 8px;
+    }
+    
+    .popup button {
+    margin: 10px 5px;
+    font-size: 0.9rem;
+    padding: 8px 16px;
+    }
 }
 
 @media (min-width: 768px) {
