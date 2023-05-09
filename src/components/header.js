@@ -15,11 +15,12 @@ function Header() {
   const [categories, setCategories] = useState([]);
   const { categoryId } = useParams();
   const [showMobileMenu, setShowMobileMenu] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [showLoginPopup, setShowLoginPopup] = useState(false);
   const [phoneNumber, setPhoneNumber] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [logoutClicked, setLogoutClicked] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
 
 
 
@@ -49,41 +50,59 @@ function Header() {
   };
   
 
-  const handleLogin = async () => {
-    if (!phoneNumber.match(/^((\+254)|(0))[1-9]\d{8}$/)) {
-      setErrorMessage("Please enter a valid Kenyan phone number");
-      return;
-    }
-    
-    // Check if the phone number is subscribed
-    const subscriberId = phoneNumber;
-    try {
-      const response = await axios.get(`${baseUrl}/api/v1/dailysubs/getsubs/${subscriberId}`, {
-        headers: {
-          'Content-Type': 'application/json',
-          'ngrok-skip-browser-warning': '69420',
-        },
-      });
+const handleLogin = async () => {
+  const storedPhoneNumber = sessionStorage.getItem('phoneNumber');
+  if (storedPhoneNumber && storedPhoneNumber.match(/^254[1-9]\d{8}$/)) {
+    setIsLoggedIn(true);
+    setShowLoginPopup(false);
+    return;
+  }
+  
+  let formattedPhoneNumber = phoneNumber;
+  
+  // Convert the phone number to the 254 format
+  if (phoneNumber.startsWith("0")) {
+    formattedPhoneNumber = "254" + phoneNumber.slice(1);
+  } else if (phoneNumber.startsWith("+")) {
+    formattedPhoneNumber = "254" + phoneNumber.slice(4);
+  } else {
+    formattedPhoneNumber = "254" + phoneNumber;
+  }
+  
+  if (!formattedPhoneNumber.match(/^254[1-9]\d{8}$/)) {
+    setErrorMessage("Please enter a valid Kenyan phone number");
+    return;
+  }
+  
+  // Check if the phone number is subscribed
+  const subscriberId = formattedPhoneNumber;
+  try {
+    const response = await axios.get(`${baseUrl}/api/v1/dailysubs/getsubs/${subscriberId}`, {
+      headers: {
+        'Content-Type': 'application/json',
+        'ngrok-skip-browser-warning': '69420',
+      },
+    });
       
+    const isSubscribed = response.data;
+    if (isSubscribed) {
+      setIsLoggedIn(true);
+      sessionStorage.setItem('phoneNumber', formattedPhoneNumber); // Store the phone number in session storage
+      setLogoutClicked(false);
 
-      const isSubscribed = response.data;
-      if (isSubscribed) {
-        setIsLoggedIn(true);
-        setShowLoginPopup(false);
-        sessionStorage.setItem('phoneNumber', phoneNumber); // Store the phone number in session storage
-      } else {
-        setErrorMessage('Phone number is not subscribed');
-      }
-    } catch (error) {
-      console.error(error);
-      setErrorMessage('An error occurred while checking the subscription status');
+    } else {
+      setErrorMessage('Phone number is not subscribed');
     }
-  };
+  } catch (error) {
+    console.error(error);
+    setErrorMessage('An error occurred while checking the subscription status');
+  }
+};
+
   
   const handleLogout = () => {
     sessionStorage.removeItem('phoneNumber');
     setLogoutClicked(true);
-    setShowLoginPopup(false); // Close the login popup
   };
   
   
@@ -93,6 +112,7 @@ function Header() {
 
   return (
     <>
+    
       <header className="header">
       <button className="header__logout-button" onClick={handleLogout}>
         <FontAwesomeIcon icon={faSignOutAlt} />
@@ -168,9 +188,9 @@ function Header() {
       {categoryId ? <Category categoryId={categoryId} /> : null}
       {logoutClicked && (
         <div className="overlay">
-    <div className="popup">
-      <h3>Please enter your phone number to Log In</h3>
-      {errorMessage && <p className="popup__error">{errorMessage}</p>}
+        <div className="popup">
+        <h3>Please enter your phone number to Log In</h3>
+        {errorMessage && <p className="popup__error">{errorMessage}</p>}
       <input
         type="text"
         placeholder="Phone number"
